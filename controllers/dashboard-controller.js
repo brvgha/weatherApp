@@ -1,4 +1,5 @@
 import axios from "axios";
+import { celsiusToFahr } from "../utils/store-utils.js";
 const oneCallRequest = `https://api.openweathermap.org/data/2.5/onecall?lat=52.160858&lon=-7.152420&units=metric&appid=4c39e307d83d080c629fbf012b9b8bb8`
 export const dashboardController = {
   async index(request, response) {
@@ -30,7 +31,8 @@ export const dashboardController = {
       const reading = result.data.current;
       report.locale = area;
       report.code = reading.weather[0].id;
-      report.temperature = reading.temp;
+      report.temperatureC = reading.temp;
+      report.temperatureF = celsiusToFahr(reading.temp);
       report.windSpeed = reading.wind_speed;
       report.pressure = reading.pressure;
       report.windDirection = reading.wind_deg;
