@@ -1,3 +1,4 @@
+<script src="../controllers/utilities-controller.js"></script>
 <table class="table is-fullwidth">
     <thead>
         <tr>
@@ -12,8 +13,8 @@
         {{#each station.readings}}
         <tr>
             <td> {{code}} </td>
-            <td> <span>{{temperatureC}}&degC</span>
-                <span>{{temperatureF}}&degF</span>
+            <td> <span>{{temperature}}&degC</span>
+                <span>{{celsiusToFahr(temperature)}}&degF</span>
             </td>
             <td> {{windSpeed}}bft </td>
             <td> {{windDirection}}&deg </td>
@@ -22,6 +23,3 @@
         {{/each}}
     </tbody>
 </table>
-<tr>
-    
-</tr>
