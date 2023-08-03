@@ -4,11 +4,11 @@ import { initStore } from "../utils/store-utils.js";
 const db = initStore("readings")
 
 export const readingStore = {
-    async getAllReadings() {
+  async getAllReadings() {
         await db.read();
         return db.data.readings;
     },
-    async addReading(stationID, reading) {
+  async addReading(stationID, reading) {
     await db.read();
     reading._id = v4();
     reading.stationid = stationID;
@@ -25,6 +25,12 @@ export const readingStore = {
   async getReadingByID(id) {
     await db.read();
     return db.data.readings.find((reading) => reading.id === id);
+  },
+  async deleteReadingbyStationID(station_id) {
+    await db.read();
+    const index = db.data.readings.findIndex((station) => station.id === station_id);
+    db.data.readings.splice(index);
+    await db.write()
   },
 
   async deleteReading(id) {

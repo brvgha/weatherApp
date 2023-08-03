@@ -1,0 +1,24 @@
+
+<div class="box box-link-hover-shadow">
+    <thead>
+        <tr>
+            <th> Code </th>
+            <th> Temp </th>
+            <th> Wind Speed </th>
+            <th> Wind Direction </th>
+            <th> Pressure </th>
+        </tr>
+    </thead>
+    {{#each latest}}
+    <tbody>
+    <tr>
+        <td> {{code}} </td>
+        <td> <span>{{temperature}}&degC</span>
+            <span>{{temperature}}&degF</span>
+        </td>
+        <td> {{windSpeed}}bft </td>
+        <td> {{windDirection}}&deg </td>
+        <td> {{pressure}}kPa </td>
+    </tr>
+    {{/each}}
+</div>

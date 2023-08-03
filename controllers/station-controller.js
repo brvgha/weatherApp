@@ -1,13 +1,16 @@
 import { stationStore } from "../models/station-store.js";
+import { dashboardController } from "./dashboard-controller.js";
 
 
 export const stationController = {
     async index(request, response) {
       const station = await stationStore.getStationByID(request.params.id);
+      const latestReading = station.readings[-1];
       const viewData = {
         title: "Station",
         station: station,
-      };
+        latest: latestReading 
+    };
       response.render("station-view", viewData);
   },
   
@@ -16,23 +19,21 @@ export const stationController = {
         title: "Weather Report",
         reading: report
       };
-
       const station = await stationStore.getStationByID(request.params.id);
       const newReading = {
       code: request.body.code,
       temperatureC : request.body.temperatureC,
-      temperatureF : request.body.celsiusToFahr(temperatureC),
       windSpeed : request.body.windSpeed,
       pressure : request.body.pressure,
       windDirection : request.body.windDirection,
       };
       
-    console.log(`adding track ${newReading.title}`);
-    await readingStore.addReading(playlist._id, newReading);
-    response.redirect("/playlist/" + playlist._id);
+    console.log(`adding Reading ${newReading.title}`);
+    await readingStore.addReading(station.id, newReading);
+    response.redirect("/station/" + station.id);
         response.render("dashboard-view", viewData);
   },
-    
+
     async getReport(request, response) {
     console.log("rendering new report");
     let report = {};

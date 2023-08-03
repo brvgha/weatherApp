@@ -27,7 +27,7 @@ export const stationStore = {
 
   async deleteStationByID(id) {
     await db.read();
-    const index = db.data.station.findIndex((station) => station.id === id);
+    const index = db.data.stations.findIndex((station) => station.id === id);
     db.data.stations.splice(index, 1);
     await db.write();
   },
