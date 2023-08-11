@@ -1,7 +1,9 @@
-# Web Development Template
+# Author: Brugha Fitzpatrick
+Student ID: 20104109
+Start Date: 03/08/2023
 
-A starter project for learning web development
+This is the weather application that is required for the Web Development 2 assignment.
 
-This is an Express.js project, designed to work well with the Glitch development environment. It includes basic express setup, handlebars templating, routing, + lowdb database.
+This application looks to take coordinates from a user and add the weather readings from the locale.
+Further development will include signup and login, and the ability to store multiple stations readings.
 
-This template is prepared in support of [Web Development II](https://next.tutors.dev/course/web-dev-2-2023) module in the [Higher Diploma in Computing](https://reader.tutors.dev/course/wit-hdip-comp-sci-showcase.netlify.app) at [SETU](https://www.setu.ie/), Ireland.

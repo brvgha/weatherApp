@@ -1,0 +1,21 @@
+{
+    "stations" : [
+        {
+        "id" : "01",
+        "name" : "Tramore",
+        "readings_id": [
+            "02",
+            "03",
+            "04"
+        ]
+    },
+    {
+        "id" : "05",
+        "name" : "Dunmore",
+        "readings_id": [
+            "06",
+            "07"
+        ]
+    }
+    ]
+}
