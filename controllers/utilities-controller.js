@@ -1,6 +1,7 @@
 import { stationStore } from "../models/station-store.js";
 import { readingStore } from "../models/reading-store.js";
 export const utilities = {
+<<<<<<< Updated upstream
   async celsiusToFahr(temp) {
   const fahr = (temp * 9 / 5) + 32;
   return fahr;
@@ -21,4 +22,10 @@ export const utilities = {
     return latestReading;
 
   },
+=======
+  celsiusToFahr(temp) {
+    const fahr = (temp * 9 / 5) + 32;
+    return fahr;
+  }
+>>>>>>> Stashed changes
 }

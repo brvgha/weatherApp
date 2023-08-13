@@ -4,7 +4,8 @@ import { utilities } from "./utilities-controller.js";
 export const dashboardController = {
   async index(request, response) {
     const stations = await stationStore.getAllStations()
-    let readingid = stations.map(station => station.readings_id);
+    const station_names = stations.map(stations => stations.name)
+    const readingid = stations.map(station => station.readings_id);
     const latest = readingid.map(id => id[readingid.length - 1]);
     const readings = await readingStore.getAllReadings();
     const latestReadings = []
@@ -15,9 +16,12 @@ export const dashboardController = {
         }
       }
     }
+    for (let x = 0; x < latestReadings.length; x++){
+      latestReadings[x].name = station_names[x];
+      latestReadings[x].temperatureF = utilities.celsiusToFahr(latestReadings[x].temperature);
+    }
     const viewData = {
       title: "Weather Application",
-      stations: stations,
       latest: latestReadings,
     };
     console.log("dashboard rendering");

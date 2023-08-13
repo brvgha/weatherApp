@@ -1,37 +1,45 @@
 <style>
-  #station_names{
+  #station_names {
     text-align: center;
     font-size: 24px;
     font-weight: bold;
   }
 </style>
-
-{{#each stations}}
-<h1 id="station_names">
-  {{name}}
-</h1>
-{{/each}}
-  <table class="table is-fullwidth">
-    <thead>
-        <tr>
-            <th> Code </th>
-            <th> Temp </th>
-            <th> Wind Speed </th>
-            <th> Wind Direction </th>
-            <th> Pressure </th>
-        </tr>
-    </thead>
-    <tbody>
-      {{#each latest}}
+{{#each latest}}
+<div class="box box-link-hover-shadow">
+  <h1 id="station_names">
+    {{name}} <a href="/station/{{_id}}" class="button">
+      {{>icons/open}}
+    </a>
+    <a href="/dashboard/deleteStation/{{_id}}" class="button">
+      {{>icons/delete}}
+    </a>
+  </h1>
+</div>
+<table class="table is-fullwidth">
+  <thead>
+      <tr>
+          <th> Code </th>
+          <th> Temp (&degC)</th>
+          <th> Temp (&degF)</th>
+          <th> Wind Speed </th>
+          <th> Wind Direction </th>
+          <th> Pressure </th>
+      </tr>
+  </thead>
+  <tbody>
     <tr>
-       <td> {{code}} </td>
-       <td> <span>{{temperature}}&degC</span>
-              <span>{{temperature}}&degF</span>
-       </td>
-       <td> {{windSpeed}}bft </td>
-       <td> {{windDirection}}&deg </td>
-       <td> {{pressure}}kPa </td>
+        <td> {{code}} </td>
+        <td> {{temperature}}&degC</td>
+        <td>{{temperatureF}}&degF</td>
+        <td> {{windSpeed}}bft </td>
+        <td> {{windDirection}}&deg</td>
+        <td> {{pressure}}kPa </td>
     </tr>
-    {{/each}}
   </tbody>
 </table>
+<<<<<<< Updated upstream
+=======
+{{/each}}
+
+>>>>>>> Stashed changes
