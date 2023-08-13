@@ -13,3 +13,4 @@ router.get("/dashboard/deleteStation/:id", dashboardController.deleteStation);
 router.get("/station/:id", stationController.index);
 router.post("/station/:id/addReading", stationController.addReading);
 router.get("/station/:station_id/deleteReading/:id", stationController.deleteReading);
+

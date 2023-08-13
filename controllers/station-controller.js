@@ -4,16 +4,16 @@ import { readingStore } from "../models/reading-store.js";
 import { utilities } from "./utilities-controller.js";
 
 
+
 export const stationController = {
     async index(request, response) {
       const station = await stationStore.getStationByID(request.params.id);
+
       const viewData = {
         title: "Station",
         station: station,
-    };
       response.render("station-view", viewData);
   },
-  
     async addReading(request, response) {
         const station = await stationStore.getStationByID(request.params.id);  
         const newReading = {

@@ -18,7 +18,7 @@ export const utilities = {
         }
       }
     }
-    console.log(latestReading);
     return latestReading;
+
   },
 }

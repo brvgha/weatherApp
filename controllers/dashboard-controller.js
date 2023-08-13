@@ -1,7 +1,6 @@
 import { readingStore } from "../models/reading-store.js";
 import { stationStore } from "../models/station-store.js";
 import { utilities } from "./utilities-controller.js";
-
 export const dashboardController = {
   async index(request, response) {
     const stations = await stationStore.getAllStations()

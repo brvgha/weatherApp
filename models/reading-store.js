@@ -11,8 +11,9 @@ export const readingStore = {
   async addReading(stationID, reading) {
     await db.read();
     reading._id = v4();
+
     reading.station_id = stationID;
-    db.data.readings.push(reading);
+ngs.push(reading);
     await db.write();
     return reading;
   },
@@ -29,8 +30,7 @@ export const readingStore = {
   async deleteReadingbyStationID(station_id) {
     await db.read();
     const index = db.data.readings.findIndex((station) => station._id === station_id);
-    db.data.readings.splice(index);
-    await db.write()
+    return db.data.readings.find((reading) => reading.id === id);
   },
 
   async deleteReading(id) {
