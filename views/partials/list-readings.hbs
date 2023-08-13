@@ -1,0 +1,30 @@
+
+<table class="table is-fullwidth">
+    <thead>
+        <tr>
+            <th> Code </th>
+            <th> Temp </th>
+            <th> Wind Speed </th>
+            <th> Wind Direction </th>
+            <th> Pressure </th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each station.readings}}
+        <tr>
+            <td> {{code}} </td>
+            <td> <span>{{temperature}}&degC</span>
+                <span>{{temperature}}&degF</span>
+            </td>
+            <td> {{windSpeed}}bft </td>
+            <td> {{windDirection}}&deg </td>
+            <td> {{pressure}}kPa </td>
+          <td>
+            <a href="/station/{{station_id}}/deleteReading/{{_id}}" class="button">
+              {{>icons/delete}}
+            </a>
+          </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

@@ -1,0 +1,38 @@
+<style>
+  #station_names{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+</style>
+
+{{#each stations}}
+<h1 id="station_names">
+  {{name}}
+</h1>
+{{/each}}
+  <table class="table is-fullwidth">
+    <thead>
+        <tr>
+            <th> Code </th>
+            <th> Temp </th>
+            <th> Wind Speed </th>
+            <th> Wind Direction </th>
+            <th> Pressure </th>
+        </tr>
+    </thead>
+    <tbody>
+      {{#each latest}}
+    <tr>
+       <td> {{code}} </td>
+       <td> <span>{{temperature}}&degC</span>
+              <span>{{temperature}}&degF</span>
+       </td>
+       <td> {{windSpeed}}bft </td>
+       <td> {{windDirection}}&deg </td>
+       <td> {{pressure}}kPa </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
