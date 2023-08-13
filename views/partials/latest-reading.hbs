@@ -1,5 +1,17 @@
+<style>
+  #station_names{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+</style>
 
-<div class="box box-link-hover-shadow">
+{{#each stations}}
+<h1 id="station_names">
+  {{name}}
+</h1>
+{{/each}}
+  <table class="table is-fullwidth">
     <thead>
         <tr>
             <th> Code </th>
@@ -9,16 +21,17 @@
             <th> Pressure </th>
         </tr>
     </thead>
-    {{#each latest}}
     <tbody>
+      {{#each latest}}
     <tr>
-        <td> {{code}} </td>
-        <td> <span>{{temperature}}&degC</span>
-            <span>{{temperature}}&degF</span>
-        </td>
-        <td> {{windSpeed}}bft </td>
-        <td> {{windDirection}}&deg </td>
-        <td> {{pressure}}kPa </td>
+       <td> {{code}} </td>
+       <td> <span>{{temperature}}&degC</span>
+              <span>{{temperature}}&degF</span>
+       </td>
+       <td> {{windSpeed}}bft </td>
+       <td> {{windDirection}}&deg </td>
+       <td> {{pressure}}kPa </td>
     </tr>
     {{/each}}
-</div>
+  </tbody>
+</table>

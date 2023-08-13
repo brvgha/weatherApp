@@ -20,14 +20,14 @@ export const stationStore = {
 
   async getStationByID(id) {
     await db.read();
-    const list = db.data.stations.find((station) => station.id === id);
-    list.readings = await readingStore.getReadingsByStationID(list.id);
+    const list = db.data.stations.find((station) => station._id === id);
+    list.readings = await readingStore.getReadingsByStationID(list._id);
     return list;
   },
 
   async deleteStationByID(id) {
     await db.read();
-    const index = db.data.stations.findIndex((station) => station.id === id);
+    const index = db.data.stations.findIndex((station) => station._id === id);
     db.data.stations.splice(index, 1);
     await db.write();
   },

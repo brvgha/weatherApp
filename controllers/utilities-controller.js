@@ -18,6 +18,7 @@ export const utilities = {
         }
       }
     }
-    return latestReadings;
+    return latestReading;
+
   },
 }
