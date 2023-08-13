@@ -15,6 +15,22 @@
       "temperature": 6,
       "windSpeed": 2,
       "pressure": 1004
+    },
+    {
+      "station_id": "05",
+      "_id": "06",
+      "code": 700,
+      "temperature": 8,
+      "windSpeed": 1,
+      "pressure": 999
+    },
+    {
+      "station_id": "05",
+      "_id": "07",
+      "code": 200,
+      "temperature": 0.5,
+      "windSpeed": 3.5,
+      "pressure": 1000
     }
   ]
 }
