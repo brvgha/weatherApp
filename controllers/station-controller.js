@@ -8,10 +8,11 @@ import { utilities } from "./utilities-controller.js";
 export const stationController = {
     async index(request, response) {
       const station = await stationStore.getStationByID(request.params.id);
-
-      const viewData = {
-        title: "Station",
-        station: station,
+      console.log(station);
+    const viewData = {
+      title: "Station",
+      station: station,
+    }
       response.render("station-view", viewData);
   },
     async addReading(request, response) {
@@ -27,7 +28,6 @@ export const stationController = {
         await readingStore.addReading(station._id, newReading);
         response.redirect("/station/" + station._id);
   },
-
     async getReading(request, response) {
       console.log("rendering new report");
       let report = {};

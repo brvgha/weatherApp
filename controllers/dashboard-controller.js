@@ -18,8 +18,10 @@ export const dashboardController = {
     }
     for (let x = 0; x < latestReadings.length; x++){
       latestReadings[x].name = station_names[x];
-      latestReadings[x].temperatureF = utilities.celsiusToFahr(latestReadings[x].temperature);
+      latestReadings[x].temperatureF = await utilities.celsiusToFahr(latestReadings[x].temperature);
+      latestReadings[x].weather = await utilities.predictWeather(latestReadings[x].code);
     }
+    console.log(latestReadings);
     const viewData = {
       title: "Weather Application",
       latest: latestReadings,

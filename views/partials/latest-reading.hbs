@@ -6,40 +6,72 @@
   }
 </style>
 {{#each latest}}
-<div class="box box-link-hover-shadow">
-  <h1 id="station_names">
-    {{name}} <a href="/station/{{_id}}" class="button">
-      {{>icons/open}}
-    </a>
-    <a href="/dashboard/deleteStation/{{_id}}" class="button">
-      {{>icons/delete}}
-    </a>
-  </h1>
+<div class="content box">
+  <section>
+    <div class="columns is-centred">
+      <div class="column is-one-sixth">
+        <div class="box has-background-grey">
+          <h1 class="has-text-white">
+            {{name}} 
+          </h1>
+        </div>
+      </div>
+      <div class="column is-one-sixth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Weather</h2>
+          <p class="has-text-white">
+            {{weather}}
+          </p>
+        </div>
+      </div>
+      <div class="column is-one-sixth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Temp.</h2>
+            <div class="columns">
+              <div class="column">
+                <p class="has-text-white">{{temperature}}&degC</p>
+              </div>
+              <div class="column">
+                <p class="has-text-white">{{temperatureF}}&degF</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="column is-one-sixth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Wind Speed</h2>
+          <p class="has-text-white">
+            {{windSpeed}}bft
+          </p>
+        </div>
+      </div>
+      <div class="column is-one-sixth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Wind Direction</h2>
+          <p class="has-text-white">
+            {{windDirection}}&deg
+          </p>
+        </div>
+      </div>
+      <div class="column is-one-sixth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">pressure</h2>
+          <p class="has-text-white">
+            {{pressure}}kPa
+          </p>
+        </div>
+      </div>
+    </div>
+    <a href="/station/{{_id}}" class="button">
+              {{>icons/open}}
+            </a>
+            <a href="/dashboard/deleteStation/{{_id}}" class="button">
+              {{>icons/delete}}
+            </a>
+  </section>
 </div>
-<table class="table is-fullwidth">
-  <thead>
-      <tr>
-          <th> Code </th>
-          <th> Temp (&degC)</th>
-          <th> Temp (&degF)</th>
-          <th> Wind Speed </th>
-          <th> Wind Direction </th>
-          <th> Pressure </th>
-      </tr>
-  </thead>
-  <tbody>
-    <tr>
-        <td> {{code}} </td>
-        <td> {{temperature}}&degC</td>
-        <td>{{temperatureF}}&degF</td>
-        <td> {{windSpeed}}bft </td>
-        <td> {{windDirection}}&deg</td>
-        <td> {{pressure}}kPa </td>
-    </tr>
-  </tbody>
-</table>
-<<<<<<< Updated upstream
-=======
 {{/each}}
 
->>>>>>> Stashed changes
+
+
+
