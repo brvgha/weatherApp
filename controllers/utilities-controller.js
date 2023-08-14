@@ -34,5 +34,26 @@ export const utilities = {
         break
     }
     return weather;
+  },
+  async windChillCalculator(temp, windSpeed) {
+    return Math.round((13.12 + (0.6215*temp) - (11.37*(windSpeed*0.16)) + ((0.3965*temp)*(windSpeed*0.16)))*100)/100
+  },
+  async getMinTemp(temps) {
+    let min = temps[0];
+    for (let i = 1; i < temps.length; i++) {
+      if (temps[i] < min) {
+        min = temps[i]
+      }
+    }
+    return min;
+  },
+  async getMaxTemp(temps){
+    let max = temps[0];
+    for (let i = 1; i < temps.length; i++) {
+      if (temps[i] > max) {
+        max = temps[i]
+      }
+    }
+    return max;
   }
 }

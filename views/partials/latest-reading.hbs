@@ -9,14 +9,14 @@
 <div class="content box">
   <section>
     <div class="columns is-centred">
-      <div class="column is-one-sixth">
+      <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <h1 class="has-text-white">
             {{name}} 
           </h1>
         </div>
       </div>
-      <div class="column is-one-sixth">
+      <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <h2 class="has-text-white">Weather</h2>
           <p class="has-text-white">
@@ -24,38 +24,34 @@
           </p>
         </div>
       </div>
-      <div class="column is-one-sixth">
+      <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <h2 class="has-text-white">Temp.</h2>
             <div class="columns">
-              <div class="column">
-                <p class="has-text-white">{{temperature}}&degC</p>
+              <div class="column is-one-third">
+                <p class="has-text-white">Current (Celsius): {{temperature}}&degC</p>
+                <p class="has-text-white">Current (Fahrenheit): {{temperatureF}}&degF</p>
+                </div>
+              <div class="column is-one-third">
+                <p class="has-text-white">Min: {{minTemp}}&degC</p>
               </div>
-              <div class="column">
-                <p class="has-text-white">{{temperatureF}}&degF</p>
+              <div class="column is-one-third">
+                <p class="has-text-white">Max: {{maxTemp}}&degC</p>
               </div>
             </div>
         </div>
       </div>
-      <div class="column is-one-sixth">
+      <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <h2 class="has-text-white">Wind Speed</h2>
-          <p class="has-text-white">
-            {{windSpeed}}bft
-          </p>
+          <p class="has-text-white">{{windSpeed}}bft</p>
+          <p class="has-text-white">{{windDirection}}&deg</p>
+          <p class="has-text-white">Feels like: {{windChill}}&degC</p>
         </div>
       </div>
-      <div class="column is-one-sixth">
+      <div class="column is-one-fifth">
         <div class="box has-background-grey">
-          <h2 class="has-text-white">Wind Direction</h2>
-          <p class="has-text-white">
-            {{windDirection}}&deg
-          </p>
-        </div>
-      </div>
-      <div class="column is-one-sixth">
-        <div class="box has-background-grey">
-          <h2 class="has-text-white">pressure</h2>
+          <h2 class="has-text-white">Pressure</h2>
           <p class="has-text-white">
             {{pressure}}kPa
           </p>

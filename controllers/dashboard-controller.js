@@ -16,12 +16,31 @@ export const dashboardController = {
         }
       }
     }
+
+    let stationTemperatures = {};
+
+    readings.forEach(reading => {
+      let stationId = reading.station_id;
+      let temperature = reading.temperature;
+      
+      if (!stationTemperatures[stationId]) {
+          stationTemperatures[stationId] = [];
+      }
+      
+      stationTemperatures[stationId].push(temperature);
+    });
+
+    let temps = Object.values(stationTemperatures)
     for (let x = 0; x < latestReadings.length; x++){
       latestReadings[x].name = station_names[x];
       latestReadings[x].temperatureF = await utilities.celsiusToFahr(latestReadings[x].temperature);
       latestReadings[x].weather = await utilities.predictWeather(latestReadings[x].code);
+      latestReadings[x].windChill = await utilities.windChillCalculator(latestReadings[x].temperature, latestReadings[x].windSpeed);
+      latestReadings[x].minTemp = await utilities.getMinTemp(temps[x]);
+      latestReadings[x].maxTemp = await utilities.getMaxTemp(temps[x]);
     }
     console.log(latestReadings);
+
     const viewData = {
       title: "Weather Application",
       latest: latestReadings,
