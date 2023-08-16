@@ -19,6 +19,11 @@
             <td> {{windSpeed}}bft </td>
             <td> {{windDirection}}&deg </td>
             <td> {{pressure}}kPa </td>
+          <td>
+            <a href="/station/{{station_id}}/deleteReading/{{_id}}" class="button">
+              {{>icons/delete}}
+            </a>
+          </td>
         </tr>
         {{/each}}
     </tbody>

@@ -1,32 +1,21 @@
 {
-  "stations": [
-    {
-      "_id": "01",
-      "name": "Tramore",
-      "readings_id": [
-        "02",
-        "03",
-        "04"
-      ]
+    "stations" : [
+        {
+        "id" : "01",
+        "name" : "Tramore",
+        "readings_id": [
+            "02",
+            "03",
+            "04"
+        ]
     },
     {
-      "_id": "05",
-      "name": "Dunmore",
-      "readings_id": [
-        "06",
-        "07"
-      ]
-    },
-    {
-      "name": "Portlaw",
-      "readings_id": [
-        "75faf909-e5aa-42ee-86b1-a7604a27994f"
-      ],
-      "_id": "5545069a-09a4-404a-b47d-c476d74aed45"
+        "id" : "05",
+        "name" : "Dunmore",
+        "readings_id": [
+            "06",
+            "07"
+        ]
     }
-<<<<<<< Updated upstream
-    ]
-=======
-  ]
->>>>>>> Stashed changes
+ ]
 }

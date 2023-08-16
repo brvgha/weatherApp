@@ -1,48 +1,4 @@
 {
-<<<<<<< Updated upstream
-    "readings": [
-        {
-            "station_id": "01",
-            "id" : "02",
-            "code" : 800,
-            "temperature" : 0.5,
-            "windSpeed" : 3.5,
-            "pressure" : 1002
-            },
-            {
-            "station_id": "01",
-            "id" : "03",
-            "code" : 600,
-            "temperature" : 6,
-            "windSpeed" : 2,
-            "pressure" : 1004
-            },
-            {
-            "station_id": "01",
-            "id" : "04",
-            "code" : 700,
-            "temperature" : 8,
-            "windSpeed" : 1,
-            "pressure" : 1005
-            },
-            {
-            "station_id": "05",
-            "id" : "06",
-            "code" : 700,
-            "temperature" : 8,
-            "windSpeed" : 1,
-            "pressure" : 999
-            },
-            {
-            "station_id": "05",
-            "id" : "07",
-            "code" : 200,
-            "temperature" : 0.5,
-            "windSpeed" : 3.5,
-            "pressure" : 1000
-            }
-    ]
-=======
   "readings": [
     {
       "station_id": "01",
@@ -51,7 +7,7 @@
       "temperature": 0.5,
       "windSpeed": 3.5,
       "pressure": 1002,
-      "windDirection": 90
+      "windDirection": 347
     },
     {
       "station_id": "01",
@@ -60,16 +16,7 @@
       "temperature": 6,
       "windSpeed": 2,
       "pressure": 1004,
-      "windDirection": 96
-    },
-    {
-      "station_id": "01",
-      "_id": "04",
-      "code": 700,
-      "temperature": 8,
-      "windSpeed": 1,
-      "pressure": 1005,
-      "windDirection": 101
+      "windDirection": 347
     },
     {
       "station_id": "05",
@@ -78,7 +25,7 @@
       "temperature": 8,
       "windSpeed": 1,
       "pressure": 999,
-      "windDirection": 98
+      "windDirection": 347
     },
     {
       "station_id": "05",
@@ -87,17 +34,7 @@
       "temperature": 0.5,
       "windSpeed": 3.5,
       "pressure": 1000,
-      "windDirection": 102
-    },
-    {
-      "code": 0,
-      "temperature": 0,
-      "windSpeed": 0,
-      "pressure": 0,
-      "windDirection": 0,
-      "_id": "75faf909-e5aa-42ee-86b1-a7604a27994f",
-      "station_id": "5545069a-09a4-404a-b47d-c476d74aed45"
+      "windDirection": 347
     }
   ]
->>>>>>> Stashed changes
 }

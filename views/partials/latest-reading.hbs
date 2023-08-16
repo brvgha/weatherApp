@@ -1,24 +1,73 @@
-
-<div class="box box-link-hover-shadow">
-    <thead>
-        <tr>
-            <th> Code </th>
-            <th> Temp </th>
-            <th> Wind Speed </th>
-            <th> Wind Direction </th>
-            <th> Pressure </th>
-        </tr>
-    </thead>
-    {{#each latest}}
-    <tbody>
-    <tr>
-        <td> {{code}} </td>
-        <td> <span>{{temperature}}&degC</span>
-            <span>{{temperature}}&degF</span>
-        </td>
-        <td> {{windSpeed}}bft </td>
-        <td> {{windDirection}}&deg </td>
-        <td> {{pressure}}kPa </td>
-    </tr>
-    {{/each}}
+<style>
+  #station_names {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+</style>
+{{#each latest}}
+<div class="content box">
+  <section>
+    <div class="columns is-centred">
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <h1 class="has-text-white">
+            {{name}} 
+          </h1>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Weather</h2>
+          <p class="has-text-white">
+            {{weather}}
+          </p>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Temp.</h2>
+            <div class="columns">
+              <div class="column is-one-third">
+                <p class="has-text-white">Current (Celsius): {{temperature}}&degC</p>
+                <p class="has-text-white">Current (Fahrenheit): {{temperatureF}}&degF</p>
+                </div>
+              <div class="column is-one-third">
+                <p class="has-text-white">Min: {{minTemp}}&degC</p>
+              </div>
+              <div class="column is-one-third">
+                <p class="has-text-white">Max: {{maxTemp}}&degC</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Wind Speed</h2>
+          <p class="has-text-white">{{windSpeed}}bft</p>
+          <p class="has-text-white">{{windDirection}}&deg</p>
+          <p class="has-text-white">Feels like: {{windChill}}&degC</p>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Pressure</h2>
+          <p class="has-text-white">
+            {{pressure}}kPa
+          </p>
+        </div>
+      </div>
+    </div>
+    <a href="/station/{{_id}}" class="button">
+              {{>icons/open}}
+            </a>
+            <a href="/dashboard/deleteStation/{{_id}}" class="button">
+              {{>icons/delete}}
+            </a>
+  </section>
 </div>
+{{/each}}
+
+
+
+

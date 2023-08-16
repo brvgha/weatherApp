@@ -1,6 +1,5 @@
 import { v4 } from "uuid";
 import { initStore } from "../utils/store-utils.js";
-import { stationStore } from "./station-store.js";
 
 const db = initStore("readings")
 
@@ -9,19 +8,14 @@ export const readingStore = {
         await db.read();
         return db.data.readings;
     },
-  async addReading(stationID, newReading) {
+  async addReading(stationID, reading) {
     await db.read();
-<<<<<<< Updated upstream
     reading._id = v4();
-    reading.stationid = stationID;
-    db.data.readings.push(reading);
-=======
-    newReading._id = v4();
-    newReading.station_id = stationID;
-    db.data.readings.push(newReading);
->>>>>>> Stashed changes
+
+    reading.station_id = stationID;
+ngs.push(reading);
     await db.write();
-    return newReading;
+    return reading;
   },
 
   async getReadingsByStationID(id) {
@@ -31,18 +25,17 @@ export const readingStore = {
 
   async getReadingByID(id) {
     await db.read();
-    return db.data.readings.find((reading) => reading.id === id);
+    return db.data.readings.find((reading) => reading._id === id);
   },
   async deleteReadingbyStationID(station_id) {
     await db.read();
-    const index = db.data.readings.findIndex((station) => station.id === station_id);
-    db.data.readings.splice(index);
-    await db.write()
+    const index = db.data.readings.findIndex((station) => station._id === station_id);
+    return db.data.readings.find((reading) => reading.id === id);
   },
 
   async deleteReading(id) {
     await db.read();
-    const index = db.data.readings.findIndex((reading) => reading.id === id);
+    const index = db.data.readings.findIndex((reading) => reading._id === id);
     db.data.readings.splice(index, 1);
     await db.write();
   },
