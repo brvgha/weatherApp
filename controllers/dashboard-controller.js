@@ -39,7 +39,7 @@ export const dashboardController = {
       latestReadings[x].minTemp = await utilities.getMinTemp(temps[x]);
       latestReadings[x].maxTemp = await utilities.getMaxTemp(temps[x]);
     }
-
+    console.log(latestReadings);
     const viewData = {
       title: "Weather Application",
       latest: latestReadings,
