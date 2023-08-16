@@ -1,12 +1,12 @@
 import { readingStore } from "../models/reading-store.js";
 import { stationStore } from "../models/station-store.js";
 import { utilities } from "./utilities-controller.js";
+const oneCallRequest = `https://api.openweathermap.org/data/2.5/onecall?lat=52.160858&lon=-7.152420&units=metric&appid=4c39e307d83d080c629fbf012b9b8bb8`
 export const dashboardController = {
   async index(request, response) {
     const stations = await stationStore.getAllStations()
     const station_names = stations.map(stations => stations.name)
-    const readingid = stations.map(station => station.readings_id);
-    const latest = readingid.map(id => id[readingid.length - 1]);
+    const latest = stations.map(latestid => latestid.readings_id[latestid.readings_id.length - 1]);
     const readings = await readingStore.getAllReadings();
     const latestReadings = []
     for (let j = 0; j < latest.length; j++){
@@ -39,7 +39,6 @@ export const dashboardController = {
       latestReadings[x].minTemp = await utilities.getMinTemp(temps[x]);
       latestReadings[x].maxTemp = await utilities.getMaxTemp(temps[x]);
     }
-    console.log(latestReadings);
 
     const viewData = {
       title: "Weather Application",
@@ -51,6 +50,7 @@ export const dashboardController = {
   async addStation(request, response) {
     const newStation = {
       name: request.body.name,
+      readings_id: [],
     };
     console.log(`adding Station ${newStation.name}`);
     await stationStore.addStation(newStation);
@@ -62,4 +62,5 @@ export const dashboardController = {
     response.redirect("/dashboard");
   }
 };
+
 

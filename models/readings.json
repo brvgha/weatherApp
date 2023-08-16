@@ -7,7 +7,7 @@
       "temperature": 0.5,
       "windSpeed": 3.5,
       "pressure": 1002,
-      "windDirection": 347
+      "windDirection": 90
     },
     {
       "station_id": "01",
@@ -16,7 +16,16 @@
       "temperature": 6,
       "windSpeed": 2,
       "pressure": 1004,
-      "windDirection": 347
+      "windDirection": 96
+    },
+    {
+      "station_id": "01",
+      "_id": "04",
+      "code": 700,
+      "temperature": 8,
+      "windSpeed": 1,
+      "pressure": 1005,
+      "windDirection": 101
     },
     {
       "station_id": "05",
@@ -25,7 +34,7 @@
       "temperature": 8,
       "windSpeed": 1,
       "pressure": 999,
-      "windDirection": 347
+      "windDirection": 98
     },
     {
       "station_id": "05",
@@ -34,7 +43,16 @@
       "temperature": 0.5,
       "windSpeed": 3.5,
       "pressure": 1000,
-      "windDirection": 347
+      "windDirection": 102
+    },
+    {
+      "code": 0,
+      "temperature": 0,
+      "windSpeed": 0,
+      "pressure": 0,
+      "windDirection": 0,
+      "_id": "75faf909-e5aa-42ee-86b1-a7604a27994f",
+      "station_id": "5545069a-09a4-404a-b47d-c476d74aed45"
     }
   ]
 }

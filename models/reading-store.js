@@ -1,5 +1,6 @@
 import { v4 } from "uuid";
 import { initStore } from "../utils/store-utils.js";
+import { stationStore } from "./station-store.js";
 
 const db = initStore("readings")
 
@@ -8,14 +9,13 @@ export const readingStore = {
         await db.read();
         return db.data.readings;
     },
-  async addReading(stationID, reading) {
+  async addReading(stationID, newReading) {
     await db.read();
-    reading._id = v4();
-
-    reading.station_id = stationID;
-ngs.push(reading);
+    newReading._id = v4();
+    newReading.station_id = stationID;
+    db.data.readings.push(newReading);
     await db.write();
-    return reading;
+    return newReading;
   },
 
   async getReadingsByStationID(id) {
@@ -25,17 +25,18 @@ ngs.push(reading);
 
   async getReadingByID(id) {
     await db.read();
-    return db.data.readings.find((reading) => reading._id === id);
+    return db.data.readings.find((reading) => reading.id === id);
   },
   async deleteReadingbyStationID(station_id) {
     await db.read();
-    const index = db.data.readings.findIndex((station) => station._id === station_id);
-    return db.data.readings.find((reading) => reading.id === id);
+    const index = db.data.readings.findIndex((station) => station.id === station_id);
+    db.data.readings.splice(index);
+    await db.write()
   },
 
   async deleteReading(id) {
     await db.read();
-    const index = db.data.readings.findIndex((reading) => reading._id === id);
+    const index = db.data.readings.findIndex((reading) => reading.id === id);
     db.data.readings.splice(index, 1);
     await db.write();
   },
