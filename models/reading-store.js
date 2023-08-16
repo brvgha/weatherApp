@@ -1,5 +1,6 @@
 import { v4 } from "uuid";
 import { initStore } from "../utils/store-utils.js";
+import { stationStore } from "./station-store.js";
 
 const db = initStore("readings")
 
@@ -8,13 +9,19 @@ export const readingStore = {
         await db.read();
         return db.data.readings;
     },
-  async addReading(stationID, reading) {
+  async addReading(stationID, newReading) {
     await db.read();
+<<<<<<< Updated upstream
     reading._id = v4();
     reading.stationid = stationID;
     db.data.readings.push(reading);
+=======
+    newReading._id = v4();
+    newReading.station_id = stationID;
+    db.data.readings.push(newReading);
+>>>>>>> Stashed changes
     await db.write();
-    return reading;
+    return newReading;
   },
 
   async getReadingsByStationID(id) {

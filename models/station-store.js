@@ -13,6 +13,17 @@ export const stationStore = {
   async addStation(station) {
     await db.read();
     station._id = v4();
+    await readingStore.addReading(station._id, {
+      "code": 0,
+      "temperature": 0,
+      "windSpeed": 0,
+      "pressure": 0,
+      "windDirection": 0
+    },)
+    const readings = await readingStore.getReadingsByStationID(station._id);
+    const latest = readings[readings.length - 1];
+    const latest_id = latest._id;
+    station.readings_id.push(latest_id);
     db.data.stations.push(station);
     await db.write();
     return station;
