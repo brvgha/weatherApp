@@ -4,8 +4,10 @@ import { utilities } from "./utilities-controller.js";
 const oneCallRequest = `https://api.openweathermap.org/data/2.5/onecall?lat=52.160858&lon=-7.152420&units=metric&appid=4c39e307d83d080c629fbf012b9b8bb8`
 export const dashboardController = {
   async index(request, response) {
-    const stations = await stationStore.getAllStations()
-    const station_names = stations.map(stations => stations.name)
+    const stations = await stationStore.getAllStations();
+    const station_names = stations.map(stations => stations.name);
+    const station_lat = stations.map(stations => stations.lat);
+    const station_lng = stations.map(stations => stations.lng);
     const latest = stations.map(latestid => latestid.readings_id[latestid.readings_id.length - 1]);
     const readings = await readingStore.getAllReadings();
     const latestReadings = []
@@ -16,7 +18,6 @@ export const dashboardController = {
         }
       }
     }
-
     let stationTemperatures = {};
 
     readings.forEach(reading => {
@@ -33,13 +34,16 @@ export const dashboardController = {
     let temps = Object.values(stationTemperatures)
     for (let x = 0; x < latestReadings.length; x++){
       latestReadings[x].name = station_names[x];
+      latestReadings[x].lat = station_lat[x];
+      latestReadings[x].lng = station_lng[x];
       latestReadings[x].temperatureF = await utilities.celsiusToFahr(latestReadings[x].temperature);
+      latestReadings[x].windSpeedBft = await utilities.kmhrToBeaufort(latestReadings[x].windSpeed);
       latestReadings[x].weather = await utilities.predictWeather(latestReadings[x].code);
       latestReadings[x].windChill = await utilities.windChillCalculator(latestReadings[x].temperature, latestReadings[x].windSpeed);
       latestReadings[x].minTemp = await utilities.getMinTemp(temps[x]);
       latestReadings[x].maxTemp = await utilities.getMaxTemp(temps[x]);
     }
-    console.log(latestReadings);
+    console.log(latestReadings[1].windSpeed);
     const viewData = {
       title: "Weather Application",
       latest: latestReadings,
@@ -51,6 +55,8 @@ export const dashboardController = {
     const newStation = {
       name: request.body.name,
       readings_id: [],
+      lat: parseFloat(request.body.lat),
+      lng: parseFloat(request.body.lng),
     };
     console.log(`adding Station ${newStation.name}`);
     await stationStore.addStation(newStation);

@@ -15,17 +15,19 @@ export const stationController = {
     response.render("station-view", viewData);
   },
   async addReading(request, response) {
-      const station = await stationStore.getStationByID(request.params.id);  
-      const newReading = {
-        code: request.body.code,
-        temperatureC : request.body.temperatureC,
-        windSpeed : request.body.windSpeed,
-        windDirection : request.body.windDirection,
-        pressure : request.body.pressure,
-      };
-      console.log(`adding Reading ${newReading.code}`);
-      await readingStore.addReading(station._id, newReading);
-      response.redirect("/station/" + station._id);
+    const station = await stationStore.getStationByID(request.params.id);
+    const newReading = {
+      code: parseInt(request.body.code),
+      temperature: parseFloat(request.body.temperature),
+      temperatureF : await utilities.celsiusToFahr(request.body.temperature),
+      windSpeed: parseFloat(request.body.windSpeed),
+      windSpeedBft: await utilities.kmhrToBeaufort(request.body.windSpeed),
+      windDirection : parseFloat(request.body.windDirection),
+      pressure : parseInt(request.body.pressure),
+    };
+    console.log(`adding Reading ${newReading.code}`);
+    await readingStore.addReading(station._id, newReading);
+    response.redirect("/station/" + station._id);
   },
   async getReading(request, response) {
     console.log("rendering new report");

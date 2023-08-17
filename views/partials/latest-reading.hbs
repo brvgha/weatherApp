@@ -4,6 +4,9 @@
     font-size: 24px;
     font-weight: bold;
   }
+  .column{
+
+  }
 </style>
 {{#each latest}}
 <div class="content box">
@@ -12,8 +15,10 @@
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <h1 class="has-text-white">
-            {{name}} 
+            {{name}}
           </h1>
+          <p class="has-text-white"><b>Latitude:</b> {{lat}}</p>
+          <p class="has-text-white"><b>Longitude:</b> {{lng}}</p>
         </div>
       </div>
       <div class="column is-one-fifth">
@@ -44,7 +49,7 @@
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <h2 class="has-text-white">Wind Speed</h2>
-          <p class="has-text-white">{{windSpeed}}bft</p>
+          <p class="has-text-white">{{windSpeedBft}}bft</p>
           <p class="has-text-white">{{windDirection}}&deg</p>
           <p class="has-text-white">Feels like: {{windChill}}&degC</p>
         </div>

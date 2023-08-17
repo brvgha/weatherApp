@@ -33,7 +33,6 @@ export const stationStore = {
     await db.read();
     console.log(id);
     const list = db.data.stations.find((station) => station._id === id);
-    console.log(list);
     list.readings = await readingStore.getReadingsByStationID(list._id);
     return list;
   },

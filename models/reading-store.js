@@ -6,9 +6,9 @@ const db = initStore("readings")
 
 export const readingStore = {
   async getAllReadings() {
-        await db.read();
-        return db.data.readings;
-    },
+    await db.read();
+    return db.data.readings;
+  },
   async addReading(stationID, newReading) {
     await db.read();
     newReading._id = v4();

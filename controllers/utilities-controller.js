@@ -55,5 +55,28 @@ export const utilities = {
       }
     }
     return max;
+  },
+  async kmhrToBeaufort(kmhrSpeed) {
+    let bft;
+    if (kmhrSpeed < 1) {
+    bft = 0;
+    } else if (kmhrSpeed > 1.0 && kmhrSpeed <= 5.0) {
+        bft = 1;
+    } else if (kmhrSpeed > 5.0 && kmhrSpeed <= 11.0) {
+        bft = 2;
+    } else if (kmhrSpeed > 11.0 && kmhrSpeed <= 19.0) {
+        bft = 3;
+    } else if (kmhrSpeed > 19.0 && kmhrSpeed <= 28.0) {
+        bft = 4;
+    } else if (kmhrSpeed > 28.0 && kmhrSpeed <= 38.0) {
+        bft = 5;
+    } else if (kmhrSpeed > 38.0 && kmhrSpeed <= 49.0) {
+        bft = 6;
+    } else if (kmhrSpeed > 49.0 && kmhrSpeed <= 61.0) {
+        bft = 7;
+    } else if (kmhrSpeed > 62.0) {
+    bft = 8;
+    }
+    return bft;
   }
 }
