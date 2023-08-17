@@ -8,6 +8,10 @@ import { utilities } from "./utilities-controller.js";
 export const stationController = {
   async index(request, response) {
     const station = await stationStore.getStationByID(request.params.id);
+    for (let i = 0; i < station.readings.length - 1; i++) {
+      station.readings[i].temperatureF = await utilities.celsiusToFahr(station.readings[i].temperature);
+      station.readings[i].windSpeedBft = await utilities.kmhrToBeaufort(station.readings[i].windSpeed);
+    }
     const viewData = {
       title: "Station",
       station: station,

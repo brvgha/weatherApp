@@ -53,6 +53,17 @@
       "windDirection": 0,
       "_id": "75faf909-e5aa-42ee-86b1-a7604a27994f",
       "station_id": "5545069a-09a4-404a-b47d-c476d74aed45"
+    },
+    {
+      "code": 300,
+      "temperature": 3.2,
+      "temperatureF": 37.76,
+      "windSpeed": 45,
+      "windSpeedBft": 6,
+      "windDirection": 347,
+      "pressure": 1001,
+      "_id": "934a5706-1a51-4534-a28e-1503c93a4ef0",
+      "station_id": "01"
     }
   ]
 }

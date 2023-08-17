@@ -58,9 +58,9 @@ export const utilities = {
   },
   async kmhrToBeaufort(kmhrSpeed) {
     let bft;
-    if (kmhrSpeed < 1) {
-    bft = 0;
-    } else if (kmhrSpeed > 1.0 && kmhrSpeed <= 5.0) {
+    if (kmhrSpeed < 1.0) {
+        bft = 0;
+    } else if (kmhrSpeed >= 1.0 && kmhrSpeed <= 5.0) {
         bft = 1;
     } else if (kmhrSpeed > 5.0 && kmhrSpeed <= 11.0) {
         bft = 2;
@@ -75,7 +75,7 @@ export const utilities = {
     } else if (kmhrSpeed > 49.0 && kmhrSpeed <= 61.0) {
         bft = 7;
     } else if (kmhrSpeed > 62.0) {
-    bft = 8;
+        bft = 8;
     }
     return bft;
   }
