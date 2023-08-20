@@ -28,6 +28,11 @@ export const stationStore = {
     await db.write();
     return station;
   },
+  async getStationsByUserID(id) {
+    await db.read();
+    console.log(id);
+    return db.data.stations.filter((station) => station.user_id === id);
+  },
 
   async getStationByID(id) {
     await db.read();

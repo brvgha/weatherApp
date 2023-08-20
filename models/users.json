@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "_id": "01",
+      "firstname": "Homer",
+      "lastname": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "1234",
+      "stations_id": [
+        "01",
+        "05"
+      ]
+    }
+  ]
+}

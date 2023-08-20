@@ -1,0 +1,23 @@
+{{> menu active="signup"}}
+<form action="/register" method="POST">
+    <label class="subtitle">Enter your details</label>
+    <div class="field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <input class="input" type="text" placeholder="Please Enter your First Name" name="firstname">
+            </div>
+            <div class="field">
+                <input class="input" type="text" placeholder="Please Enter your Surname" name="lastname">
+            </div>
+            <div class="field">
+                <input class="input" type="eamil" placeholder="Please Enter your Email" name="email">
+            </div>
+            <div class="field">
+                <input class="input" type="text" placeholder="Please Enter Password" name="password">
+            </div>
+        </div>
+    </div>
+    <div class="field is-grouped">
+        <button class="button is-link">Signup</button>
+    </div>
+</form>

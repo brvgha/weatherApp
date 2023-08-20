@@ -50,7 +50,13 @@
         <div class="box has-background-grey">
           <h2 class="has-text-white">Wind Speed</h2>
           <p class="has-text-white">{{windSpeedBft}}bft</p>
-          <p class="has-text-white">{{windDirection}}&deg</p>
+          <div class="column is-one-third">
+            <p class="has-text-white">Min: {{minWindSpeed}}km/hr</p>
+          </div>
+          <div class="column is-one-third">
+            <p class="has-text-white">Max: {{maxWindSpeed}}km/hr</p>
+          </div>
+          <p class="has-text-white">Wind Direction: {{windDirection}}&deg</p>
           <p class="has-text-white">Feels like: {{windChill}}&degC</p>
         </div>
       </div>
@@ -60,6 +66,12 @@
           <p class="has-text-white">
             {{pressure}}kPa
           </p>
+          <div class="column is-one-third">
+            <p class="has-text-white">Min: {{minPressure}}kPa</p>
+          </div>
+          <div class="column is-one-third">
+            <p class="has-text-white">Max: {{maxPressure}}kPa</p>
+          </div>
         </div>
       </div>
     </div>

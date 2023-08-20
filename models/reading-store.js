@@ -25,18 +25,12 @@ export const readingStore = {
 
   async getReadingByID(id) {
     await db.read();
-    return db.data.readings.find((reading) => reading.id === id);
-  },
-  async deleteReadingbyStationID(station_id) {
-    await db.read();
-    const index = db.data.readings.findIndex((station) => station.id === station_id);
-    db.data.readings.splice(index);
-    await db.write()
+    return db.data.readings.find((reading) => reading._id === id);
   },
 
   async deleteReading(id) {
     await db.read();
-    const index = db.data.readings.findIndex((reading) => reading.id === id);
+    const index = db.data.readings.findIndex((reading) => reading._id === id);
     db.data.readings.splice(index, 1);
     await db.write();
   },

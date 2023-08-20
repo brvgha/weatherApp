@@ -56,6 +56,42 @@ export const utilities = {
     }
     return max;
   },
+  async getMinWindSpeed(windSpeeds){
+    let min = windSpeeds[0];
+    for (let i = 1; i < windSpeeds.length; i++) {
+      if (windSpeeds[i] < min) {
+        min = windSpeeds[i]
+      }
+    }
+    return min;
+  },
+  async getMaxWindSpeed(windSpeeds){
+    let max = windSpeeds[0];
+    for (let i = 1; i < windSpeeds.length; i++) {
+      if (windSpeeds[i] > max) {
+        max = windSpeeds[i]
+      }
+    }
+    return max;
+  },
+  async getMinPressure(pressures) {
+    let min = pressures[0];
+    for (let i = 1; i < pressures.length; i++) {
+      if (pressures[i] < min) {
+        min = pressures[i]
+      }
+    }
+    return min;
+  },
+  async getMaxPressure(pressures){
+    let max = pressures[0];
+    for (let i = 1; i < pressures.length; i++) {
+      if (pressures[i] > max) {
+        max = pressures[i]
+      }
+    }
+    return max;
+  },
   async kmhrToBeaufort(kmhrSpeed) {
     let bft;
     if (kmhrSpeed < 1.0) {

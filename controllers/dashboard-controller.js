@@ -1,10 +1,12 @@
 import { readingStore } from "../models/reading-store.js";
 import { stationStore } from "../models/station-store.js";
 import { utilities } from "./utilities-controller.js";
-const oneCallRequest = `https://api.openweathermap.org/data/2.5/onecall?lat=52.160858&lon=-7.152420&units=metric&appid=4c39e307d83d080c629fbf012b9b8bb8`
+import { accountsController } from "./accounts-controller.js";
+
 export const dashboardController = {
   async index(request, response) {
-    const stations = await stationStore.getAllStations();
+    const loggedInUser = await accountsController.getLoggedInUser(request);
+    const stations = await stationStore.getStationsByUserID(loggedInUser._id);
     const station_names = stations.map(stations => stations.name);
     const station_lat = stations.map(stations => stations.lat);
     const station_lng = stations.map(stations => stations.lng);
@@ -31,7 +33,34 @@ export const dashboardController = {
       stationTemperatures[stationId].push(temperature);
     });
 
-    let temps = Object.values(stationTemperatures)
+    let stationWind = {};
+
+    readings.forEach(reading => {
+      let stationId = reading.station_id;
+      let windSpeed = reading.windSpeed;
+      
+      if (!stationWind[stationId]) {
+          stationWind[stationId] = [];
+      }
+      
+      stationWind[stationId].push(windSpeed);
+    });
+    let stationPressure = {};
+
+    readings.forEach(reading => {
+      let stationId = reading.station_id;
+      let pressure = reading.pressure;
+      
+      if (!stationPressure[stationId]) {
+          stationPressure[stationId] = [];
+      }
+      
+      stationPressure[stationId].push(pressure);
+    });
+
+    let temps = Object.values(stationTemperatures);
+    let winds = Object.values(stationWind);
+    let pressures = Object.values(stationPressure);
     for (let x = 0; x < latestReadings.length; x++){
       latestReadings[x].name = station_names[x];
       latestReadings[x].lat = station_lat[x];
@@ -42,6 +71,10 @@ export const dashboardController = {
       latestReadings[x].windChill = await utilities.windChillCalculator(latestReadings[x].temperature, latestReadings[x].windSpeed);
       latestReadings[x].minTemp = await utilities.getMinTemp(temps[x]);
       latestReadings[x].maxTemp = await utilities.getMaxTemp(temps[x]);
+      latestReadings[x].minWindSpeed = await utilities.getMinWindSpeed(winds[x]);
+      latestReadings[x].maxWindSpeed = await utilities.getMaxWindSpeed(winds[x]);
+      latestReadings[x].minPressure = await utilities.getMinPressure(pressures[x]);
+      latestReadings[x].maxPressure= await utilities.getMaxPressure(pressures[x]);
     }
     
     const viewData = {
@@ -52,19 +85,22 @@ export const dashboardController = {
     response.render("dashboard-view", viewData);
   },
   async addStation(request, response) {
+    const loggedInUser = await accountsController.getLoggedInUser(request);
     const newStation = {
       name: request.body.name,
       readings_id: [],
       lat: parseFloat(request.body.lat),
       lng: parseFloat(request.body.lng),
+      user_id: loggedInUser._id,
     };
     console.log(`adding Station ${newStation.name}`);
     await stationStore.addStation(newStation);
     response.redirect("/dashboard");
   },
   async deleteStation(request, response) {
-    stationStore.deleteStationByID(request.params.id);
-    readingStore.deleteReadingbyStationID(request.params.id);
+    const station_id = request.params.id;
+    console.log(`Deleting Station ${station_id}`);
+    await stationStore.deleteStationByID(station_id);
     response.redirect("/dashboard");
   }
 };

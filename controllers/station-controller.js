@@ -61,9 +61,9 @@ export const stationController = {
   },
   async deleteReading(request, response){
     const station_id = request.params.station_id;
-    const reading_id = request.params.reading_id;
-    console.log("Deleting Reading ${reading_id} from the station ${station_id}");
-    await readingStore.deleteReading(request.params.reading_id);
+    const reading_id = request.params.id;
+    console.log(`Deleting Reading ${reading_id} from the station ${station_id}`);
+    await readingStore.deleteReading(reading_id);
     response.redirect("/station/" + station_id);
   }
 }
