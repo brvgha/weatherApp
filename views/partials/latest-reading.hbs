@@ -4,10 +4,12 @@
     font-size: 24px;
     font-weight: bold;
   }
-  .column{
-
-  }
 </style>
+<script>
+  Handlebars.registerHelper("trendChk", function(a, b){
+    return a === b
+  })
+</script>
 {{#each latest}}
 <div class="content box">
   <section>
@@ -42,6 +44,9 @@
               </div>
               <div class="column is-one-third">
                 <p class="has-text-white">Max: {{maxTemp}}&degC</p>
+              </div>
+              <div class="column is-one-third">
+                <p>{{#trendChk trendTemp 0}}</p>
               </div>
             </div>
         </div>

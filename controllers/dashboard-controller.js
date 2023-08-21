@@ -74,12 +74,16 @@ export const dashboardController = {
       latestReadings[x].minWindSpeed = await utilities.getMinWindSpeed(winds[x]);
       latestReadings[x].maxWindSpeed = await utilities.getMaxWindSpeed(winds[x]);
       latestReadings[x].minPressure = await utilities.getMinPressure(pressures[x]);
-      latestReadings[x].maxPressure= await utilities.getMaxPressure(pressures[x]);
+      latestReadings[x].maxPressure = await utilities.getMaxPressure(pressures[x]);
+      latestReadings[x].trendTemp = await utilities.trendTemp(temps[x]);
+      latestReadings[x].trendWind = await utilities.trendWind(winds[x]);
+      latestReadings[x].trendPressure = await utilities.trendPressure(pressures[x]);
     }
     
     const viewData = {
       title: "Weather Application",
       latest: latestReadings,
+      stations: stations
     };
     console.log("dashboard rendering");
     response.render("dashboard-view", viewData);

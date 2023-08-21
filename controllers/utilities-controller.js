@@ -1,5 +1,6 @@
 import { stationStore } from "../models/station-store.js";
 import { readingStore } from "../models/reading-store.js";
+import { HandlebarsCompile } from "express-handlebars/types/index.js";
 export const utilities = {
   async celsiusToFahr(temp) {
     const fahr = (temp * 9 / 5) + 32;
@@ -36,7 +37,7 @@ export const utilities = {
     return weather;
   },
   async windChillCalculator(temp, windSpeed) {
-    return Math.round((13.12 + (0.6215*temp) - (11.37*(windSpeed*0.16)) + ((0.3965*temp)*(windSpeed*0.16)))*100)/100
+    return Math.round((13.12 + (0.6215 * temp) - (11.37 * (windSpeed * 0.16)) + ((0.3965 * temp) * (windSpeed * 0.16))) * 100) / 100
   },
   async getMinTemp(temps) {
     let min = temps[0];
@@ -47,7 +48,7 @@ export const utilities = {
     }
     return min;
   },
-  async getMaxTemp(temps){
+  async getMaxTemp(temps) {
     let max = temps[0];
     for (let i = 1; i < temps.length; i++) {
       if (temps[i] > max) {
@@ -56,7 +57,7 @@ export const utilities = {
     }
     return max;
   },
-  async getMinWindSpeed(windSpeeds){
+  async getMinWindSpeed(windSpeeds) {
     let min = windSpeeds[0];
     for (let i = 1; i < windSpeeds.length; i++) {
       if (windSpeeds[i] < min) {
@@ -65,7 +66,7 @@ export const utilities = {
     }
     return min;
   },
-  async getMaxWindSpeed(windSpeeds){
+  async getMaxWindSpeed(windSpeeds) {
     let max = windSpeeds[0];
     for (let i = 1; i < windSpeeds.length; i++) {
       if (windSpeeds[i] > max) {
@@ -83,7 +84,7 @@ export const utilities = {
     }
     return min;
   },
-  async getMaxPressure(pressures){
+  async getMaxPressure(pressures) {
     let max = pressures[0];
     for (let i = 1; i < pressures.length; i++) {
       if (pressures[i] > max) {
@@ -95,24 +96,72 @@ export const utilities = {
   async kmhrToBeaufort(kmhrSpeed) {
     let bft;
     if (kmhrSpeed < 1.0) {
-        bft = 0;
+      bft = 0;
     } else if (kmhrSpeed >= 1.0 && kmhrSpeed <= 5.0) {
-        bft = 1;
+      bft = 1;
     } else if (kmhrSpeed > 5.0 && kmhrSpeed <= 11.0) {
-        bft = 2;
+      bft = 2;
     } else if (kmhrSpeed > 11.0 && kmhrSpeed <= 19.0) {
-        bft = 3;
+      bft = 3;
     } else if (kmhrSpeed > 19.0 && kmhrSpeed <= 28.0) {
-        bft = 4;
+      bft = 4;
     } else if (kmhrSpeed > 28.0 && kmhrSpeed <= 38.0) {
-        bft = 5;
+      bft = 5;
     } else if (kmhrSpeed > 38.0 && kmhrSpeed <= 49.0) {
-        bft = 6;
+      bft = 6;
     } else if (kmhrSpeed > 49.0 && kmhrSpeed <= 61.0) {
-        bft = 7;
+      bft = 7;
     } else if (kmhrSpeed > 62.0) {
-        bft = 8;
+      bft = 8;
     }
     return bft;
+  },
+  async trendTemp(temps) {
+    if (temps.length < 1) {
+      return false;
+    }
+    else {
+      const lastReading = temps[temps.length - 1];
+      const scndLastReading = temps[temps.length - 2];
+      if (lastReading > scndLastReading) {
+        return 1;
+      } else if (lastReading == scndLastReading) {
+        return 0;
+      } else {
+        return -1;
+      }
+    }
+  },
+  async trendWind(windSpeeds) {
+    if (windSpeeds.length < 1) {
+      return 0;
+    }
+    else {
+      const lastReading = windSpeeds[windSpeeds.length - 1];
+      const scndLastReading = windSpeeds[windSpeeds.length - 2];
+      if (lastReading > scndLastReading) {
+        return 1;
+      } else if (lastReading == scndLastReading) {
+        return 0;
+      } else {
+        return -1;
+      }
+    }
+  },
+  async trendPressure(pressures) {
+    if (pressures.length < 1) {
+      return 0;
+    }
+    else {
+      const lastReading = pressures[pressures.length - 1];
+      const scndLastReading = pressures[pressures.length - 2];
+      if (lastReading > scndLastReading) {
+        return 1;
+      } else if (lastReading == scndLastReading) {
+        return 0;
+      } else {
+        return -1;
+      }
+    }
   }
 }
