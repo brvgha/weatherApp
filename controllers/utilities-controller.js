@@ -1,10 +1,23 @@
 import { stationStore } from "../models/station-store.js";
 import { readingStore } from "../models/reading-store.js";
-import { HandlebarsCompile } from "express-handlebars/types/index.js";
+import Handlebars from "handlebars";
 export const utilities = {
   async celsiusToFahr(temp) {
     const fahr = (temp * 9 / 5) + 32;
     return fahr;
+  },
+  async getLatestReadings(stations) {
+    const latest = stations.map(latestid => latestid.readings_id[latestid.readings_id.length - 1]);
+    const readings = await readingStore.getAllReadings();
+    const latestReadings = []
+    for (let j = 0; j < latest.length; j++){
+      for (let i = 0; i < readings.length; i++) {
+        if (readings[i]._id === latest[j]) {
+          latestReadings.push(readings[i]);
+        }
+      }
+    }
+    return latestReadings;
   },
   async predictWeather(code) {
     let weather;
@@ -118,7 +131,7 @@ export const utilities = {
   },
   async trendTemp(temps) {
     if (temps.length < 1) {
-      return false;
+      return 0;
     }
     else {
       const lastReading = temps[temps.length - 1];
@@ -163,5 +176,5 @@ export const utilities = {
         return -1;
       }
     }
-  }
+  },
 }

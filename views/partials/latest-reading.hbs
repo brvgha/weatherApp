@@ -5,11 +5,6 @@
     font-weight: bold;
   }
 </style>
-<script>
-  Handlebars.registerHelper("trendChk", function(a, b){
-    return a === b
-  })
-</script>
 {{#each latest}}
 <div class="content box">
   <section>
@@ -33,7 +28,28 @@
       </div>
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
-          <h2 class="has-text-white">Temp.</h2>
+          <div class="columns">
+            <div class="column is-one-half">
+              <h2 class="has-text-white">Temp.</h2>
+            </div>
+            <div class="column is-one-half">
+              {{#if (trendChk trendTemp 0)}}
+              <p>
+                {{>icons/temp-steady}}
+              </p>
+              {{/if}}
+              {{#if (trendChk trendTemp 1)}}
+              <p>
+                {{>icons/temp-up}}
+              </p>
+              {{/if}}
+              {{#if (trendChk trendTemp -1)}}
+              <p>
+                {{>icons/temp-down}}
+              </p>
+              {{/if}}
+            </div>
+          </div>
             <div class="columns">
               <div class="column is-one-third">
                 <p class="has-text-white">Current (Celsius): {{temperature}}&degC</p>
@@ -45,9 +61,7 @@
               <div class="column is-one-third">
                 <p class="has-text-white">Max: {{maxTemp}}&degC</p>
               </div>
-              <div class="column is-one-third">
-                <p>{{#trendChk trendTemp 0}}</p>
-              </div>
+              
             </div>
         </div>
       </div>
@@ -80,7 +94,7 @@
         </div>
       </div>
     </div>
-    <a href="/station/{{station_id}}" class="button">
+            <a href="/station/{{station_id}}" class="button">
               {{>icons/open}}
             </a>
             <a href="/dashboard/deleteStation/{{station_id}}" class="button">

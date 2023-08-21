@@ -42,6 +42,14 @@ export const stationStore = {
     return list;
   },
 
+  async addReadingIDtoStation(station_id,reading_id) {
+    await db.read();
+    const station = db.data.stations.find((station) => station._id === station_id);
+    station.readings_id.push(reading_id);
+    await db.write();
+    return station;
+  },
+
   async deleteStationByID(id) {
     await db.read();
     const index = db.data.stations.findIndex((station) => station._id === id);

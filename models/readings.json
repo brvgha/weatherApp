@@ -64,6 +64,26 @@
       "pressure": 1001,
       "_id": "934a5706-1a51-4534-a28e-1503c93a4ef0",
       "station_id": "01"
+    },
+    {
+      "code": 0,
+      "temperature": 0,
+      "windSpeed": 0,
+      "pressure": 0,
+      "windDirection": 0,
+      "_id": "ee7e47d1-25ec-4ec9-bf43-f43cb956fb3f",
+      "station_id": "63931430-16e5-4b16-81f2-a09cdf4eeca5"
+    },
+    {
+      "code": 800,
+      "temperature": 3.2,
+      "temperatureF": 37.76,
+      "windSpeed": 2.2,
+      "windSpeedBft": 1,
+      "windDirection": 347,
+      "pressure": 1001,
+      "_id": "e8fe007a-d956-4010-a0c8-b4ba30303e1c",
+      "station_id": "01"
     }
   ]
 }

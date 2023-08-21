@@ -3,8 +3,6 @@ import { dashboardController } from "./dashboard-controller.js";
 import { readingStore } from "../models/reading-store.js";
 import { utilities } from "./utilities-controller.js";
 
-
-
 export const stationController = {
   async index(request, response) {
     const station = await stationStore.getStationByID(request.params.id);
@@ -30,7 +28,9 @@ export const stationController = {
       pressure : parseInt(request.body.pressure),
     };
     console.log(`adding Reading ${newReading.code}`);
-    await readingStore.addReading(station._id, newReading);
+    const added = await readingStore.addReading(station._id, newReading);
+    console.log(added);
+    await stationStore.addReadingIDtoStation(station._id, added._id)
     response.redirect("/station/" + station._id);
   },
   async getReading(request, response) {

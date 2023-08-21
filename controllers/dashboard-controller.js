@@ -2,6 +2,7 @@ import { readingStore } from "../models/reading-store.js";
 import { stationStore } from "../models/station-store.js";
 import { utilities } from "./utilities-controller.js";
 import { accountsController } from "./accounts-controller.js";
+import Handlebars from "handlebars";
 
 export const dashboardController = {
   async index(request, response) {
@@ -20,6 +21,7 @@ export const dashboardController = {
         }
       }
     }
+    
     let stationTemperatures = {};
 
     readings.forEach(reading => {
@@ -83,11 +85,15 @@ export const dashboardController = {
     const viewData = {
       title: "Weather Application",
       latest: latestReadings,
-      stations: stations
+      stations: stations,
+      trendChk: Handlebars.registerHelper("trendChk", function(a, b){
+      return a === b;
+    })
     };
     console.log("dashboard rendering");
     response.render("dashboard-view", viewData);
   },
+
   async addStation(request, response) {
     const loggedInUser = await accountsController.getLoggedInUser(request);
     const newStation = {

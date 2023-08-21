@@ -16,6 +16,7 @@
     "express-handlebars": "^6.0.7",
     "fs-extra": "^11.1.0",
     "handlebars": "^4.7.8",
+    "hbs": "^4.2.0",
     "lowdb": "^5.1.0",
     "uuid": "^9.0.0",
     "xhr": "^2.6.0",
