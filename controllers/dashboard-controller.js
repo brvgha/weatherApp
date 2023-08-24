@@ -14,8 +14,8 @@ export const dashboardController = {
     const latest = stations.map(latestid => latestid.readings_id[latestid.readings_id.length - 1]);
     const readings = await readingStore.getAllReadings();
     let latestReadings = []
-    for (let j = 0; j < latest.length; j++){
-      for (let i = 0; i < readings.length; i++) {
+    for (let j = 0; j <= latest.length - 1; j++){
+      for (let i = 0; i <= readings.length - 1; i++) {
         if (readings[i]._id === latest[j]) {
           latestReadings.push(readings[i]);
         }
