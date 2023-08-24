@@ -13,7 +13,7 @@ export const dashboardController = {
     const station_lng = stations.map(stations => stations.lng);
     const latest = stations.map(latestid => latestid.readings_id[latestid.readings_id.length - 1]);
     const readings = await readingStore.getAllReadings();
-    const latestReadings = []
+    let latestReadings = []
     for (let j = 0; j < latest.length; j++){
       for (let i = 0; i < readings.length; i++) {
         if (readings[i]._id === latest[j]) {
@@ -82,6 +82,7 @@ export const dashboardController = {
       latestReadings[x].trendPressure = await utilities.trendPressure(pressures[x]);
     }
     
+    latestReadings = await utilities.sortStations(latestReadings);
     const viewData = {
       title: "Weather Application",
       latest: latestReadings,

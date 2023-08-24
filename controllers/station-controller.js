@@ -6,9 +6,10 @@ import { utilities } from "./utilities-controller.js";
 export const stationController = {
   async index(request, response) {
     const station = await stationStore.getStationByID(request.params.id);
-    for (let i = 0; i < station.readings.length - 1; i++) {
+    for (let i = 0; i <= station.readings.length - 1; i++) {
       station.readings[i].temperatureF = await utilities.celsiusToFahr(station.readings[i].temperature);
       station.readings[i].windSpeedBft = await utilities.kmhrToBeaufort(station.readings[i].windSpeed);
+      station.readings[i].formattedTime = await utilities.formatDateTime(station.readings[i].time);
     }
     const viewData = {
       title: "Station",
@@ -29,7 +30,6 @@ export const stationController = {
     };
     console.log(`adding Reading ${newReading.code}`);
     const added = await readingStore.addReading(station._id, newReading);
-    console.log(added);
     await stationStore.addReadingIDtoStation(station._id, added._id)
     response.redirect("/station/" + station._id);
   },

@@ -136,12 +136,13 @@ export const utilities = {
     else {
       const lastReading = temps[temps.length - 1];
       const scndLastReading = temps[temps.length - 2];
-      if (lastReading > scndLastReading) {
+      const thrdLastReading = temps[temps.length - 3];
+      if (lastReading > scndLastReading & scndLastReading > thrdLastReading) {
         return 1;
-      } else if (lastReading == scndLastReading) {
-        return 0;
-      } else {
+      } else if (lastReading == scndLastReading & scndLastReading == thrdLastReading) {
         return -1;
+      } else {
+        return 0;
       }
     }
   },
@@ -152,12 +153,13 @@ export const utilities = {
     else {
       const lastReading = windSpeeds[windSpeeds.length - 1];
       const scndLastReading = windSpeeds[windSpeeds.length - 2];
-      if (lastReading > scndLastReading) {
+      const thrdLastReading = windSpeeds[windSpeeds.length - 3];
+      if (lastReading > scndLastReading & scndLastReading > thrdLastReading) {
         return 1;
-      } else if (lastReading == scndLastReading) {
-        return 0;
-      } else {
+      } else if (lastReading < scndLastReading & scndLastReading < thrdLastReading) {
         return -1;
+      } else {
+        return 0;
       }
     }
   },
@@ -168,13 +170,31 @@ export const utilities = {
     else {
       const lastReading = pressures[pressures.length - 1];
       const scndLastReading = pressures[pressures.length - 2];
-      if (lastReading > scndLastReading) {
+      const thrdLastReading = pressures[pressures.length - 3];
+      if (lastReading > scndLastReading & scndLastReading > thrdLastReading) {
         return 1;
-      } else if (lastReading == scndLastReading) {
-        return 0;
-      } else {
+      } else if (lastReading < scndLastReading & scndLastReading < thrdLastReading) {
         return -1;
+      } else {
+        return 0;
       }
     }
   },
+  async sortStations(stations) {
+    const sortedStations = stations.sort((stationX, stationY) => stationX.name.localeCompare(stationY.name));
+    return sortedStations;
+  },
+  async formatDateTime(dateTime) {
+    let dateTimeObj = new Date(dateTime);
+    let formatter = {
+      timeZone: "UTC",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+    let formattedTime = dateTimeObj.toLocaleString("en-GB", formatter);
+    return formattedTime;
+  }
 }

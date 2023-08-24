@@ -14,6 +14,7 @@ export const stationStore = {
     await db.read();
     station._id = v4();
     await readingStore.addReading(station._id, {
+      "time": new Date(),
       "code": 0,
       "temperature": 0,
       "windSpeed": 0,
@@ -42,7 +43,7 @@ export const stationStore = {
     return list;
   },
 
-  async addReadingIDtoStation(station_id,reading_id) {
+  async addReadingIDtoStation(station_id, reading_id) {
     await db.read();
     const station = db.data.stations.find((station) => station._id === station_id);
     station.readings_id.push(reading_id);
@@ -60,5 +61,5 @@ export const stationStore = {
   async deleteAllStations() {
     db.data.stations = [];
     await db.write();
-  },
-};
+  }
+}

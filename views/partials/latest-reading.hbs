@@ -13,6 +13,7 @@
         <div class="box has-background-grey">
           <h1 class="has-text-white">
             {{name}}
+            {{>icons/pinpoint}}
           </h1>
           <p class="has-text-white"><b>Latitude:</b> {{lat}}</p>
           <p class="has-text-white"><b>Longitude:</b> {{lng}}</p>
@@ -61,19 +62,41 @@
               <div class="column is-one-third">
                 <p class="has-text-white">Max: {{maxTemp}}&degC</p>
               </div>
-              
             </div>
         </div>
       </div>
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
-          <h2 class="has-text-white">Wind Speed</h2>
-          <p class="has-text-white">{{windSpeedBft}}bft</p>
-          <div class="column is-one-third">
-            <p class="has-text-white">Min: {{minWindSpeed}}km/hr</p>
+          <div class="columns">
+            <div class="column is-one-third">
+              <h2 class="has-text-white">Wind Speed</h2>
+            </div>
+            <div class="column is-one-third">
+              {{>icons/wind}}
+            </div>
+            <div class="column is-one-third">
+              {{#if (trendChk trendWind 1)}}
+              <p>
+                {{>icons/arrow-up}}
+              </p>
+              {{/if}}
+              {{#if (trendChk trendWind -1)}}
+              <p>
+                {{>icons/arrow-down}}
+              </p>
+              {{/if}}
+            </div>
           </div>
-          <div class="column is-one-third">
-            <p class="has-text-white">Max: {{maxWindSpeed}}km/hr</p>
+          <div class="columns">
+            <div class="column is-one-third">
+              <p class="has-text-white">{{windSpeedBft}}bft</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Min: {{minWindSpeed}}km/hr</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Max: {{maxWindSpeed}}km/hr</p>
+            </div>
           </div>
           <p class="has-text-white">Wind Direction: {{windDirection}}&deg</p>
           <p class="has-text-white">Feels like: {{windChill}}&degC</p>
@@ -81,26 +104,48 @@
       </div>
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
-          <h2 class="has-text-white">Pressure</h2>
-          <p class="has-text-white">
-            {{pressure}}kPa
-          </p>
-          <div class="column is-one-third">
-            <p class="has-text-white">Min: {{minPressure}}kPa</p>
+          <div class="columns">
+            <div class="column is-one-third">
+              <h2 class="has-text-white">Pressure</h2>
+            </div>
+            <div class="column is-one-third">
+              {{>icons/pressure}}
+            </div>
+            <div class="column is-one-third">
+              {{#if (trendChk trendPressure 1)}}
+              <p>
+                {{>icons/arrow-up}}
+              </p>
+              {{/if}}
+              {{#if (trendChk trendPressure -1)}}
+              <p>
+                {{>icons/arrow-down}}
+              </p>
+              {{/if}}
+            </div>
           </div>
-          <div class="column is-one-third">
-            <p class="has-text-white">Max: {{maxPressure}}kPa</p>
-          </div>
+          <div class="columns">
+            <div class="column is-one-third">
+              <p class="has-text-white">
+                {{pressure}}kPa
+              </p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Min: {{minPressure}}kPa</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Max: {{maxPressure}}kPa</p>
+            </div>
         </div>
       </div>
     </div>
-            <a href="/station/{{station_id}}" class="button">
-              {{>icons/open}}
-            </a>
-            <a href="/dashboard/deleteStation/{{station_id}}" class="button">
-              {{>icons/delete}}
-            </a>
   </section>
+  <a href="/station/{{station_id}}" class="button">
+    {{>icons/open}}
+  </a>
+  <a href="/dashboard/deleteStation/{{station_id}}" class="button">
+    {{>icons/delete}}
+  </a>
 </div>
 {{/each}}
 
