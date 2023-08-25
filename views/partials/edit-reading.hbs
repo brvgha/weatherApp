@@ -1,23 +1,21 @@
-{{> menu}}
-
-<form class="box" action="/playlist/{{playlist._id}}/updatetrack/{{track._id}}" method="POST">
+<form class="box" action="/station/{{station._id}}/updateReading/{{reading._id}}" method="POST">
     <label>Track Details:</label>
     <div class="field is-horizontal">
         <div class="field-body">
             <div class="field">
-                <input class="input" type="text" placeholder="Enter Code" name="code" value="{{reading.code}}">
+                <input class="input" type="number" placeholder="Enter Code" name="code" value="{{reading.code}}">
             </div>
             <div class="field">
-                <input class="input" type="text" placeholder="Enter Temperature" name="temperature" value="{{reading.temperature}}">
+                <input class="input" type="float" placeholder="Enter Temperature" name="temperature" value="{{reading.temperature}}">
             </div>
             <div class="field">
-                <input class="input" type="text" placeholder="Enter Wind Speed" name="windSpeed" value="{{reading.windSpeed}}">
+                <input class="input" type="float" placeholder="Enter Wind Speed" name="windSpeed" value="{{reading.windSpeed}}">
             </div>
             <div class="field">
-                <input class="input" type="text" placeholder="Enter Wind Direction" name="windDirection" value="{{reading.windDirection}}">
+                <input class="input" type="float" placeholder="Enter Wind Direction" name="windDirection" value="{{reading.windDirection}}">
             </div>
             <div class="field">
-                <input class="input" type="text" placeholder="Enter Pressure" name="pressure" value="{{reading.pressure}}">
+                <input class="input" type="number" placeholder="Enter Pressure" name="pressure" value="{{reading.pressure}}">
             </div>
         </div>
     </div>

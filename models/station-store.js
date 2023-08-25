@@ -13,13 +13,14 @@ export const stationStore = {
   async addStation(station) {
     await db.read();
     station._id = v4();
+    const dateTime = new Date();
     await readingStore.addReading(station._id, {
-      "time": new Date(),
-      "code": 0,
-      "temperature": 0,
-      "windSpeed": 0,
-      "pressure": 0,
-      "windDirection": 0
+      "time": dateTime,
+      "code": null,
+      "temperature": null,
+      "windSpeed": null,
+      "pressure": null,
+      "windDirection": null
     },)
     const readings = await readingStore.getReadingsByStationID(station._id);
     const latest = readings[readings.length - 1];
@@ -31,13 +32,11 @@ export const stationStore = {
   },
   async getStationsByUserID(id) {
     await db.read();
-    console.log(id);
     return db.data.stations.filter((station) => station.user_id === id);
   },
 
   async getStationByID(id) {
     await db.read();
-    console.log(id);
     const list = db.data.stations.find((station) => station._id === id);
     list.readings = await readingStore.getReadingsByStationID(list._id);
     return list;

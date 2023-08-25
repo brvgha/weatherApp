@@ -13,7 +13,22 @@ export const readingStore = {
     await db.read();
     newReading._id = v4();
     newReading.station_id = stationID;
-    db.data.readings.push(newReading);
+    
+    // check to see if the Readings are empyty first, and if not check if the the first reading is null
+    // from adding a station, thus replacing the first null reading with the true first reading
+    const stationReadings = db.data.readings.filter((reading) => reading.station_id === stationID);
+    if (stationReadings.length != 0) {
+      if (stationReadings[0].code === null) {
+        stationReadings[0].code = newReading.code;
+        stationReadings[0].temperature = newReading.temperature; 
+        stationReadings[0].windSpeed = newReading.windSpeed; 
+        stationReadings[0].windDirection = newReading.windDirection;
+        stationReadings[0].pressure = newReading.pressure; 
+    }
+    }else {
+      db.data.readings.push(newReading);
+    }
+    console.log(stationReadings);
     await db.write();
     return newReading;
   },
@@ -40,10 +55,14 @@ export const readingStore = {
     await db.write();
   },
 
-  async updateReading(reading, updatedreading) {
-    reading.title = updatedreading.title;
-    reading.artist = updatedreading.artist;
-    reading.duration = updatedreading.duration;
+  async updateReading(readingid, updatedReading) {
+    const reading = await this.getReadingByID(readingid);
+    reading.time = new Date();
+    reading.code = updatedReading.code;
+    reading.temperature = updatedReading.temperature;
+    reading.windSpeed = updatedReading.windSpeed;
+    reading.windDirection = updatedReading.windDirection;
+    reading.pressure = updatedReading.pressure;
     await db.write();
   },
 }

@@ -47,6 +47,19 @@ export const dashboardController = {
       
       stationWind[stationId].push(windSpeed);
     });
+
+    let stationDegrees = {};
+    readings.forEach(reading => {
+      let stationId = reading.station_id;
+      let degree = reading.windDirection;
+      
+      if (!stationDegrees[stationId]) {
+          stationDegrees[stationId] = [];
+      }
+      
+      stationDegrees[stationId].push(degree);
+    });
+
     let stationPressure = {};
 
     readings.forEach(reading => {
@@ -63,7 +76,8 @@ export const dashboardController = {
     let temps = Object.values(stationTemperatures);
     let winds = Object.values(stationWind);
     let pressures = Object.values(stationPressure);
-    for (let x = 0; x < latestReadings.length; x++){
+    let degrees = Object.values(stationDegrees);
+    for (let x = 0; x <= latestReadings.length - 1; x++){
       latestReadings[x].name = station_names[x];
       latestReadings[x].lat = station_lat[x];
       latestReadings[x].lng = station_lng[x];
@@ -80,8 +94,8 @@ export const dashboardController = {
       latestReadings[x].trendTemp = await utilities.trendTemp(temps[x]);
       latestReadings[x].trendWind = await utilities.trendWind(winds[x]);
       latestReadings[x].trendPressure = await utilities.trendPressure(pressures[x]);
+      latestReadings[x].windDirectionNESW = await utilities.getWindDirectionNESW(degrees[x][degrees[x].length - 1]);
     }
-    
     latestReadings = await utilities.sortStations(latestReadings);
     const viewData = {
       title: "Weather Application",

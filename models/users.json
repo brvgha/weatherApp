@@ -10,6 +10,13 @@
         "01",
         "05"
       ]
+    },
+    {
+      "firstname": "john",
+      "lastname": "doe",
+      "email": "brughafitzpatrick@gmail.com",
+      "password": "1234",
+      "_id": "209ef1ef-ba64-407a-8071-2228d227ec40"
     }
   ]
 }

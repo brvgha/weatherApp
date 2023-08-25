@@ -122,9 +122,9 @@ export const utilities = {
       bft = 5;
     } else if (kmhrSpeed > 38.0 && kmhrSpeed <= 49.0) {
       bft = 6;
-    } else if (kmhrSpeed > 49.0 && kmhrSpeed <= 61.0) {
+    } else if (kmhrSpeed > 49.0 && kmhrSpeed < 62.0) {
       bft = 7;
-    } else if (kmhrSpeed > 62.0) {
+    } else if (kmhrSpeed >= 62.0) {
       bft = 8;
     }
     return bft;
@@ -196,5 +196,37 @@ export const utilities = {
     }
     let formattedTime = dateTimeObj.toLocaleString("en-GB", formatter);
     return formattedTime;
+  },
+
+  async getWindDirectionNESW(degrees) {
+    let direction;
+    if (degrees >= 337.5 || degrees < 22.5) {
+      direction = "N";
+    } 
+    else if(degrees >= 22.5 && degrees < 67.5) {
+      direction = "NE";
+    } 
+    else if (degrees >= 67.5 && degrees < 112.5) {
+      direction = "E";
+    }
+    else if (degrees >= 112.5 && degrees < 157.5) {
+      direction = "SE";
+    }
+    else if (degrees >= 157.5 && degrees < 202.5) {
+      direction = "S";
+    }
+    else if (degrees >= 202.5 && degrees < 247.5) {
+      direction = "SW";
+    }
+    else if (degrees >= 247.5 && degrees < 292.5) {
+      direction = "W";
+    }
+    else if (degrees >= 292.5 && degrees < 337.5) {
+      direction = "NW";
+    }
+    else {
+      direction = "Invalid"
+    }
+  return direction;
   }
 }

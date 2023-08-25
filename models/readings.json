@@ -34,11 +34,11 @@
       "station_id": "05",
       "_id": "06",
       "code": 700,
-      "temperature": 8,
-      "windSpeed": 1,
+      "temperature": 5,
+      "windSpeed": 50,
       "pressure": 999,
       "windDirection": 98,
-      "time": "2023-03-12T13:37:27+00:00"
+      "time": "2023-08-25T12:20:59.357Z"
     },
     {
       "station_id": "05",
@@ -49,6 +49,16 @@
       "pressure": 1000,
       "windDirection": 102,
       "time": "2023-03-12T13:37:27+00:00"
+    },
+    {
+      "time": "2023-08-25T12:58:59.397Z",
+      "code": 800,
+      "temperature": 3.2,
+      "windSpeed": 2.2,
+      "pressure": 1001,
+      "windDirection": 347,
+      "_id": "8b446e1e-a30b-4ceb-bbaf-51b1444c66af",
+      "station_id": "6c460358-36f2-4b66-821b-76cb584a493b"
     }
   ]
 }
