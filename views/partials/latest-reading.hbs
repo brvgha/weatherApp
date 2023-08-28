@@ -21,10 +21,56 @@
       </div>
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
-          <h2 class="has-text-white">Weather</h2>
-          <p class="has-text-white">
-            {{weather}}
-          </p>
+          <div class="columns">
+            <div class="column is-one-half">
+              <h2 class="has-text-white">Weather</h2>
+            </div>
+            <div class="column is-one-half">
+              {{#if (weatherIcon code 1)}}
+              <p>
+                {{>icons/clear}}
+              </p>
+              {{/if}}
+              {{#if (weatherIcon code 2)}}
+              <p>
+                {{>icons/partial-clouds}}
+              </p>
+              {{/if}}
+              {{#if (weatherIcon code 3)}}
+              <p>
+                {{>icons/cloudy}}
+              </p>
+              {{/if}}
+              {{#if (weatherIcon code 4)}}
+              <p>
+                {{>icons/light-showers}}
+              </p>
+              {{/if}}
+              {{#if (weatherIcon code 5)}}
+              <p>
+                {{>icons/heavy-showers}}
+              </p>
+              {{/if}}
+              {{#if (weatherIcon code 6)}}
+              <p>
+                {{>icons/rain}}
+              </p>
+              {{/if}}
+              {{#if (weatherIcon code 7)}}
+              <p>
+                {{>icons/snow}}
+              </p>
+              {{/if}}
+              {{#if (weatherIcon code 8)}}
+              <p>
+                {{>icons/thunder}}
+              </p>
+              {{/if}}
+            </div>
+          </div>
+            <p class="has-text-white">
+              {{weather}}
+            </p>
         </div>
       </div>
       <div class="column is-one-fifth">
@@ -68,13 +114,16 @@
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <div class="columns">
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
               <h2 class="has-text-white">Wind Speed</h2>
             </div>
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
+              <p></p>
+            </div>
+            <div class="column is-one-quarter">
               {{>icons/wind}}
             </div>
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
               {{#if (trendChk trendWind 1)}}
               <p>
                 {{>icons/arrow-up}}
@@ -106,13 +155,16 @@
       <div class="column is-one-fifth">
         <div class="box has-background-grey">
           <div class="columns">
-            <div class="column is-one-third">
-              <h2 class="has-text-white">Pressure</h2>
+            <div class="column is-one-quarter">
+              <h2 class="has-text-white">Atmos.</h2>
             </div>
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
+              <p></p>
+            </div>
+            <div class="column is-one-quarter">
               {{>icons/pressure}}
             </div>
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
               {{#if (trendChk trendPressure 1)}}
               <p>
                 {{>icons/arrow-up}}

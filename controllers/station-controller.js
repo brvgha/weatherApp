@@ -43,7 +43,37 @@ export const stationController = {
       latest: latestReading,
       trendChk: Handlebars.registerHelper("trendChk", function(a, b){
       return a === b;
-    })
+      }),
+      weatherIcon: Handlebars.registerHelper("weatherIcon", function (a, b) {
+        let icon;
+        switch (a) {
+          case 100:
+            icon = 1;
+            break;
+          case 200:
+            icon = 2;
+            break;
+          case 300:
+            icon = 3;
+            break;
+          case 400:
+            icon = 4;
+            break;
+          case 500:
+            icon = 5;
+            break;
+          case 600:
+            icon = 6;
+            break;
+          case 700:
+            icon = 7;
+            break;
+          case 800:
+            icon = 8;
+            break;
+        }
+        return icon === b;
+      })
     }
     response.render("station-view", viewData);
   },
