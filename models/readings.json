@@ -61,13 +61,13 @@
       "station_id": "6c460358-36f2-4b66-821b-76cb584a493b"
     },
     {
-      "time": "1970-01-20T14:20:19.456Z",
+      "time": "2023-08-28T10:49:20.000Z",
       "code": 800,
       "temperature": 16.41,
       "windSpeed": 3.13,
       "pressure": 1018,
-      "windDirection": 284,
-      "_id": "65631c1d-4f07-49fe-a2d9-9a8df4b055d5",
+      "windDirection": 289,
+      "_id": "73278056-80a9-4202-8de6-b1d40aa756ab",
       "station_id": "01"
     }
   ]

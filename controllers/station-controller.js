@@ -101,18 +101,18 @@ export const stationController = {
     let report = {};
     const lat = station.lat;
     const lng = station.lng;
-    const dateTime = new Date();
     const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=4c39e307d83d080c629fbf012b9b8bb8`
     const result = await axios.get(requestUrl);
     if (result.status == 200) {
       const reading = result.data.current;
-      report.time = new Date(reading.dt);
+      report.time = new Date(reading.dt*1000);
       report.code = Math.round(reading.weather[0].id/100)*100;
       report.temperature = reading.temp;
       report.windSpeed = reading.wind_speed;
       report.pressure = reading.pressure;
       report.windDirection = reading.wind_deg;
     }
+    console.log(result.data.current);
     console.log(`adding Reading ${report.code}`);
     const added = await readingStore.addReading(station._id, report);
     await stationStore.addReadingIDtoStation(station._id, added._id)
