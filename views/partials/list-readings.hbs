@@ -1,4 +1,138 @@
-
+<div class="content box">
+  <section>
+    <div class="columns is-centred">
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <h1 class="has-text-white">
+            {{latest.name}}
+            {{>icons/pinpoint}}
+          </h1>
+          <p class="has-text-white"><b>Latitude:</b> {{latest.lat}}</p>
+          <p class="has-text-white"><b>Longitude:</b> {{latest.lng}}</p>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <h2 class="has-text-white">Weather</h2>
+          <p class="has-text-white">
+            {{latest.weather}}
+          </p>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <div class="columns">
+            <div class="column is-one-half">
+              <h2 class="has-text-white">Temp.</h2>
+            </div>
+            <div class="column is-one-half">
+              {{#if (trendChk latest.trendTemp 0)}}
+              <p>
+                {{>icons/temp-steady}}
+              </p>
+              {{/if}}
+              {{#if (trendChk latest.trendTemp 1)}}
+              <p>
+                {{>icons/temp-up}}
+              </p>
+              {{/if}}
+              {{#if (trendChk latest.trendTemp -1)}}
+              <p>
+                {{>icons/temp-down}}
+              </p>
+              {{/if}}
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third">
+              <p class="has-text-white">Current (Celsius): {{latest.temperature}}&degC</p>
+              <p class="has-text-white">Current (Fahrenheit): {{latest.temperatureF}}&degF</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Min: {{latest.minTemp}}&degC</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Max: {{latest.maxTemp}}&degC</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <div class="columns">
+            <div class="column is-one-third">
+              <h2 class="has-text-white">Wind Speed</h2>
+            </div>
+            <div class="column is-one-third">
+              {{>icons/wind}}
+            </div>
+            <div class="column is-one-third">
+              {{#if (trendChk latest.trendWind 1)}}
+              <p>
+                {{>icons/arrow-up}}
+              </p>
+              {{/if}}
+              {{#if (trendChk latest.trendWind -1)}}
+              <p>
+                {{>icons/arrow-down}}
+              </p>
+              {{/if}}
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third">
+              <p class="has-text-white">{{latest.windSpeedBft}}bft</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Min: {{latest.minWindSpeed}}km/hr</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Max: {{latest.maxWindSpeed}}km/hr</p>
+            </div>
+          </div>
+          <p class="has-text-white">Wind Direction (Degrees): {{latest.windDirection}}&deg</p>
+          <p class="has-text-white">Wind Direction (Direction): {{latest.windDirectionNESW}}</p>
+          <p class="has-text-white">Feels like: {{latest.windChill}}&degC</p>
+        </div>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="box has-background-grey">
+          <div class="columns">
+            <div class="column is-one-third">
+              <h2 class="has-text-white">Pressure</h2>
+            </div>
+            <div class="column is-one-third">
+              {{>icons/pressure}}
+            </div>
+            <div class="column is-one-third">
+              {{#if (trendChk latest.trendPressure 1)}}
+              <p>
+                {{>icons/arrow-up}}
+              </p>
+              {{/if}}
+              {{#if (trendChk latest.trendPressure -1)}}
+              <p>
+                {{>icons/arrow-down}}
+              </p>
+              {{/if}}
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-one-third">
+              <p class="has-text-white">
+                {{latest.pressure}}kPa
+              </p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Min: {{latest.minPressure}}kPa</p>
+            </div>
+            <div class="column is-one-third">
+              <p class="has-text-white">Max: {{latest.maxPressure}}kPa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
 <table class="table is-fullwidth">
     <thead>
         <tr>

@@ -2,10 +2,36 @@ import { stationStore } from "../models/station-store.js";
 import { dashboardController } from "./dashboard-controller.js";
 import { readingStore } from "../models/reading-store.js";
 import { utilities } from "./utilities-controller.js";
+import Handlebars from "handlebars";
 
 export const stationController = {
   async index(request, response) {
     const station = await stationStore.getStationByID(request.params.id);
+    const readings = await readingStore.getReadingsByStationID(station._id);
+    const temps = readings.map(reading => reading.temperature);
+    const windSpeeds = readings.map(reading => reading.windSpeed);
+    const pressures = readings.map(reading => reading.pressure);
+    const latestReading = readings[readings.length - 1];
+    
+    latestReading.name = station.name;
+    latestReading.weather = await utilities.predictWeather(latestReading.code);
+    latestReading.temperatureF = await utilities.celsiusToFahr(latestReading.temperature);
+    latestReading.windSpeedBft = await utilities.kmhrToBeaufort(latestReading.windSpeed);
+    latestReading.windDirectionNESW = await utilities.getWindDirectionNESW(latestReading.windDirection);
+    latestReading.windChill = await utilities.windChillCalculator(latestReading.temperature, latestReading.windSpeed);
+    latestReading.minTemp = await utilities.getMinTemp(temps);
+    latestReading.maxTemp = await utilities.getMaxTemp(temps);
+    latestReading.minWindSpeed = await utilities.getMinWindSpeed(windSpeeds);
+    latestReading.maxWindSpeed = await utilities.getMaxWindSpeed(windSpeeds);
+    latestReading.minPressure = await utilities.getMinPressure(pressures);
+    latestReading.maxPressure = await utilities.getMaxPressure(pressures);
+    latestReading.trendTemp = await utilities.trendTemp(temps);
+    latestReading.trendWind = await utilities.trendWind(windSpeeds);
+    latestReading.trendPressure = await utilities.trendPressure(pressures);
+    latestReading.lat = station.lat;
+    latestReading.lng = station.lng;
+
+
     for (let i = 0; i <= station.readings.length - 1; i++) {
       station.readings[i].temperatureF = await utilities.celsiusToFahr(station.readings[i].temperature);
       station.readings[i].windSpeedBft = await utilities.kmhrToBeaufort(station.readings[i].windSpeed);
@@ -14,6 +40,10 @@ export const stationController = {
     const viewData = {
       title: "Station",
       station: station,
+      latest: latestReading,
+      trendChk: Handlebars.registerHelper("trendChk", function(a, b){
+      return a === b;
+    })
     }
     response.render("station-view", viewData);
   },
