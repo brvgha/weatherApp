@@ -17,7 +17,7 @@ export const readingStore = {
     // check to see if the Readings are empyty first, and if not check if the the first reading is null
     // from adding a station, thus replacing the first null reading with the true first reading
     const stationReadings = db.data.readings.filter((reading) => reading.station_id === stationID);
-    if (stationReadings.length != 0) {
+    /*if (stationReadings.length != 0) {
       if (stationReadings[0].code === null) {
         stationReadings[0].code = newReading.code;
         stationReadings[0].temperature = newReading.temperature; 
@@ -27,8 +27,9 @@ export const readingStore = {
     }
     }else {
       db.data.readings.push(newReading);
-    }
-    console.log(stationReadings);
+    }*/
+    db.data.readings.push(newReading);
+    console.log(db.data.readings);
     await db.write();
     return newReading;
   },

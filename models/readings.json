@@ -59,6 +59,15 @@
       "windDirection": 347,
       "_id": "8b446e1e-a30b-4ceb-bbaf-51b1444c66af",
       "station_id": "6c460358-36f2-4b66-821b-76cb584a493b"
+    },
+    {
+      "code": 800,
+      "temperature": 15.96,
+      "windSpeed": 4.63,
+      "pressure": 1018,
+      "windDirection": 310,
+      "_id": "b58363ab-5390-49e9-9ea6-29c7cd9ead51",
+      "station_id": "01"
     }
   ]
 }
