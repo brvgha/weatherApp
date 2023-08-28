@@ -1,6 +1,7 @@
 import { stationStore } from "../models/station-store.js";
 import { readingStore } from "../models/reading-store.js";
-import Handlebars from "handlebars";
+import gmaps from "@googlemaps/js-api-loader";
+
 export const utilities = {
   async celsiusToFahr(temp) {
     const fahr = (temp * 9 / 5) + 32;
@@ -10,7 +11,7 @@ export const utilities = {
     const latest = stations.map(latestid => latestid.readings_id[latestid.readings_id.length - 1]);
     const readings = await readingStore.getAllReadings();
     const latestReadings = []
-    for (let j = 0; j < latest.length; j++){
+    for (let j = 0; j < latest.length; j++) {
       for (let i = 0; i < readings.length; i++) {
         if (readings[i]._id === latest[j]) {
           latestReadings.push(readings[i]);
@@ -202,10 +203,10 @@ export const utilities = {
     let direction;
     if (degrees >= 337.5 || degrees < 22.5) {
       direction = "N";
-    } 
-    else if(degrees >= 22.5 && degrees < 67.5) {
+    }
+    else if (degrees >= 22.5 && degrees < 67.5) {
       direction = "NE";
-    } 
+    }
     else if (degrees >= 67.5 && degrees < 112.5) {
       direction = "E";
     }
@@ -227,6 +228,20 @@ export const utilities = {
     else {
       direction = "Invalid"
     }
-  return direction;
+    return direction;
+  },
+  async initMap(lat, lng) {
+    const { Loader } = gmaps;
+    const loader = new gmaps.Loader({
+      apiKey: "AIzaSyBSvR_TSJKwKLD1azC32vi-0noNtBzKmd4",
+      version: "weekly"
+    });
+    let map;
+    const { Map } = await google.maps.importLibrary("maps");
+
+    map = new Map(document.getElementById("map"), {
+      center: { lat: lat, lng: lng },
+      zoom: 10,
+    });
   }
 }

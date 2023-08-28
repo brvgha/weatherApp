@@ -5,6 +5,7 @@ import { utilities } from "./utilities-controller.js";
 import Handlebars from "handlebars";
 import axios from "axios";
 
+
 export const stationController = {
   async index(request, response) {
     const station = await stationStore.getStationByID(request.params.id);
@@ -14,6 +15,7 @@ export const stationController = {
     const pressures = readings.map(reading => reading.pressure);
     const latestReading = readings[readings.length - 1];
     
+
     latestReading.name = station.name;
     latestReading.weather = await utilities.predictWeather(latestReading.code);
     latestReading.temperatureF = await utilities.celsiusToFahr(latestReading.temperature);
@@ -38,6 +40,7 @@ export const stationController = {
       station.readings[i].windSpeedBft = await utilities.kmhrToBeaufort(station.readings[i].windSpeed);
       station.readings[i].formattedTime = await utilities.formatDateTime(station.readings[i].time);
     }
+
     const viewData = {
       title: "Station",
       station: station,
@@ -96,7 +99,6 @@ export const stationController = {
   },
   async getReading(request, response) {
     const station = await stationStore.getStationByID(request.params.id);
-    console.log(station._id)
     console.log("rendering new report");
     let report = {};
     const lat = station.lat;
@@ -112,7 +114,6 @@ export const stationController = {
       report.pressure = reading.pressure;
       report.windDirection = reading.wind_deg;
     }
-    console.log(result.data.current);
     console.log(`adding Reading ${report.code}`);
     const added = await readingStore.addReading(station._id, report);
     await stationStore.addReadingIDtoStation(station._id, added._id)
