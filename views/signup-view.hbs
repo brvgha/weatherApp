@@ -1,8 +1,21 @@
 {{> welcome-menu active="signup"}}
-{{> about-weather}}
+<style>
+    figure{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20em;
+        height: 10em;
+        width: 20em;
+    }
+</style>
+
+<figure>
+    <img src="../images/weather2.png">
+</figure>
 <form action="/register" method="POST">
     <label class="subtitle">Enter your details</label>
-    <div class="field is-horizontal">
+    <div class="field is-vertical">
         <div class="field-body">
             <div class="field">
                 <input class="input" type="text" placeholder="Please Enter your First Name" name="firstname">

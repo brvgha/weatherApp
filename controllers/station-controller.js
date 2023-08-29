@@ -14,8 +14,23 @@ export const stationController = {
     const windSpeeds = readings.map(reading => reading.windSpeed);
     const pressures = readings.map(reading => reading.pressure);
     const latestReading = readings[readings.length - 1];
-    
+    let report = {};
+    const lat = station.lat;
+    const lng = station.lng;
+    const requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=4c39e307d83d080c629fbf012b9b8bb8`
+    const result = await axios.get(requestUrl);
 
+    if (result.status == 200) {
+      report.tempTrend = [];
+      report.trendLabels = [];
+      const trends = result.data.daily;
+      for (let i = 0; i < trends.length; i++) {
+        report.tempTrend.push(trends[i].temp.day);
+        const date = new Date(trends[i].dt * 1000);
+        report.trendLabels.push(`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`);
+      }
+    }
+    
     latestReading.name = station.name;
     latestReading.weather = await utilities.predictWeather(latestReading.code);
     latestReading.temperatureF = await utilities.celsiusToFahr(latestReading.temperature);
@@ -40,7 +55,7 @@ export const stationController = {
       station.readings[i].windSpeedBft = await utilities.kmhrToBeaufort(station.readings[i].windSpeed);
       station.readings[i].formattedTime = await utilities.formatDateTime(station.readings[i].time);
     }
-
+    
     const viewData = {
       title: "Station",
       station: station,
@@ -77,7 +92,8 @@ export const stationController = {
             break;
         }
         return icon === b;
-      })
+      }),
+      reading: report
     }
     response.render("station-view", viewData);
   },
@@ -107,8 +123,8 @@ export const stationController = {
     const result = await axios.get(requestUrl);
     if (result.status == 200) {
       const reading = result.data.current;
-      report.time = new Date(reading.dt*1000);
-      report.code = Math.round(reading.weather[0].id/100)*100;
+      report.time = new Date(reading.dt * 1000);
+      report.code = Math.round(reading.weather[0].id / 100) * 100;
       report.temperature = reading.temp;
       report.windSpeed = reading.wind_speed;
       report.pressure = reading.pressure;
@@ -116,7 +132,7 @@ export const stationController = {
     }
     console.log(`adding Reading ${report.code}`);
     const added = await readingStore.addReading(station._id, report);
-    await stationStore.addReadingIDtoStation(station._id, added._id)
+    await stationStore.addReadingIDtoStation(station._id, added._id);
     response.redirect("/station/" + station._id);
   },
   async deleteReading(request, response){

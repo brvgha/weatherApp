@@ -4,7 +4,27 @@
       src="https://maps.googleapis.com/maps/api/staticmap?center={{station.lat}},{{station.lng}}&zoom=14&size=1200x400&key=AIzaSyBSvR_TSJKwKLD1azC32vi-0noNtBzKmd4">
   </center>
 </figure>
-
+<div class="box" id="chart">
+  <script>
+    const data = {
+      labels: [
+        {{#each reading.trendLabels}}
+          "{{this}}",
+        {{/each}}
+      ],
+      datasets: [
+        {
+          name: "Temperature", type: "line",
+          values: [
+            {{#each reading.tempTrend}}
+              {{this}},
+            {{/each}}
+          ]
+        }
+      ]
+    }
+  </script>
+</div>
 <div class="content box">
   <section>
     <div class="columns is-centred">
@@ -226,6 +246,3 @@
         {{/each}}
     </tbody>
 </table>
-
-
-
