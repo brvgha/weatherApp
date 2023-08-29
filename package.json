@@ -1,7 +1,7 @@
 {
-  "name": "weather",
+  "name": "glitch-template",
   "version": "0.0.1",
-  "description": "Weather Application",
+  "description": "Starter project for simplified Express application",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -26,7 +26,7 @@
     "xhr2": "^0.2.1"
   },
   "repository": {
-    "url": "https://github.com/wit-hdip-comp-sci-2021/todo-list-1"
+    "url": "https://github.com/brvgha/weatherApp"
   },
   "license": "MIT",
   "keywords": [
