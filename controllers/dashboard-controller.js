@@ -73,6 +73,7 @@ export const dashboardController = {
       stationPressure[stationId].push(pressure);
     });
 
+
     let temps = Object.values(stationTemperatures);
     let winds = Object.values(stationWind);
     let pressures = Object.values(stationPressure);
